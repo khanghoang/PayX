@@ -9,8 +9,16 @@ export default class FieldContainer extends Component {
     this.state = {
       arrErrorMessages: [],
       valid: false,
-      value: null
+      value: ''
     }
+  }
+
+  reset() {
+    this.setState({
+      arrErrorMessages: [],
+      valid: false,
+      value: ''
+    });
   }
 
   onValidateInput(e) {
@@ -32,7 +40,6 @@ export default class FieldContainer extends Component {
       });
 
       this.props.isValid && this.props.isValid(e, false);
-
     } else {
       this.setState({
         valid: true,
@@ -42,6 +49,8 @@ export default class FieldContainer extends Component {
 
       this.props.isValid && this.props.isValid(e, true);
     }
+
+    this.props.onValueChange && this.props.onValueChange(this.props.name, value);
   }
 
   render() {
@@ -58,6 +67,7 @@ export default class FieldContainer extends Component {
           onChange={this.onValidateInput}
           onKeyPress={this.onValidateInput}
           onKeyUp={this.onValidateInput}
+          ref="input"
           />
         {errorMessages}
       </div>

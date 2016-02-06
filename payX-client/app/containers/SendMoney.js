@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FieldContainer from '../containers/Field';
+import Dropdown from '../components/Dropdown';
 import _ from 'lodash';
 
 export default class SendMoney extends Component {
@@ -7,9 +8,53 @@ export default class SendMoney extends Component {
   constructor() {
     super();
     this.onValidChanged = this.onValidChanged.bind(this);
+    this.onClickReset = this.onClickReset.bind(this);
+    this.onClickSend = this.onClickSend.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
+    this.state = {
+      currency: 'usd',
+      amount: null,
+      to: null,
+      message: null,
+      paymentType: null, // 'SEND' or 'PAY'
+    }
+  }
+
+  reset() {
+    this.setState({
+      currency: 'usd',
+      amount: null,
+      to: null,
+      message: null,
+      paymentType: null, // 'SEND' or 'PAY'
+    });
+
+    _.each([
+      this.refs.dropdown,
+      this.refs.to,
+      this.refs.amount
+    ], (e) => { e.reset && e.reset() });
   }
 
   onValidChanged(e, isValue) {
+  }
+
+  onValueChange(inputName, value) {
+    switch(inputName) {
+      case 'to':
+        this.setState({to: value})
+        break;
+      case 'amount':
+        this.setState({amount: value})
+        break;
+    }
+  }
+
+  onClickSend() {
+  }
+
+  onClickReset() {
+    this.reset();
   }
 
   render() {
@@ -41,7 +86,22 @@ export default class SendMoney extends Component {
         }
       },
       isRequiredRule
-    ]
+    ];
+
+    const datasource = [
+      {
+        value: 'usd',
+        displayString: 'USD'
+      },
+      {
+        value: 'eur',
+        displayString: 'EUR'
+      },
+      {
+        value: 'jpy',
+        displayString: 'JPY'
+      }
+    ];
 
     return (
       <div>
@@ -51,13 +111,34 @@ export default class SendMoney extends Component {
           inputType='text'
           rules={emailRules}
           isValid={this.onValidChanged}
+          onValueChange={this.onValueChange}
+          name='to'
+          ref='to'
         />
         <FieldContainer
           prefixText='amount'
           inputType='number'
           rules={amountRules}
           isValid={this.onValidChanged}
+          onValueChange={this.onValueChange}
+          name='amount'
+          ref='amount'
         />
+        <Dropdown
+          datasource={datasource}
+          onChange={(e) => console.log(e.target.value)}
+          ref='dropdown'
+        />
+      <button
+        type="button"
+        onClick={this.onClickReset}>
+        Reset
+      </button>
+      <button
+        type="button"
+        onClick={this.onClickSend}>
+        Send
+      </button>
       </div>
     )
   }

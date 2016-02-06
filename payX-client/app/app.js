@@ -1,12 +1,9 @@
 import "babel-polyfill";
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from './containers/App';
 import HomePage from './containers/HomePage';
 import SendMoney from './containers/SendMoney';
 import ViewTransactions from './containers/ViewTransactions';
-import Routes from './routes';
-// import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import * as reducers from './reducers';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';

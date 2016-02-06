@@ -1,0 +1,1 @@
+export dummyReducers from './dummyReducer';

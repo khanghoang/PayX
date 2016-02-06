@@ -2,6 +2,28 @@ import React, { Component } from 'react';
 
 export default class Field extends Component {
 
+  constructor() {
+    super();
+    this.onChange = this.onChange.bind(this);
+    this.state = {
+      value: ''
+    };
+  }
+
+  onChange(e) {
+    this.setState({
+      value: e.target.value
+    });
+
+    this.props.onKeyChange && this.props.onKeyChange(e);
+  }
+
+  reset() {
+    this.setState({
+      value: ''
+    });
+  }
+
   render() {
     return (
       <div>
@@ -10,8 +32,9 @@ export default class Field extends Component {
           type={this.props.inputType}
           onBlur={this.props.onBlur}
           onKeyUp={this.props.onKeyUp}
-          onKeyChange={this.props.onKeyChange}
+          onChange={this.onChange}
           onKeyPress={this.props.onKeyPress}
+          value={this.state.value}
           />
         </div>
     )

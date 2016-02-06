@@ -19,6 +19,7 @@ export default class FieldContainer extends Component {
       valid: false,
       value: ''
     });
+    this.refs.input.reset();
   }
 
   onValidateInput(e) {

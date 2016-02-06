@@ -8,6 +8,9 @@ export default class Field extends Component {
         <input
           type={this.props.inputType}
           onBlur={this.props.onBlur}
+          onKeyUp={this.props.onKeyUp}
+          onKeyChange={this.props.onKeyChange}
+          onKeyPress={this.props.onKeyPress}
           />
         </div>
     )

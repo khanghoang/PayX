@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-export default class App extends Component {
+export default class SendMoney extends Component {
   render() {
     return (
-      <div className="App">
-        HomePage1
+      <div>
+        SendMoney
       </div>
     )
   }

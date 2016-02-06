@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import App from './containers/App';
 import HomePage from './containers/HomePage';
+import SendMoney from './containers/SendMoney';
+import ViewTransactions from './containers/ViewTransactions';
 import Routes from './routes';
 // import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
@@ -29,10 +31,10 @@ middleware.listenForReplays(store);
 ReactDOM.render(
   (<Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={HomePage}>
-        <IndexRoute component={HomePage}/>
-        <Route path="homepage" component={HomePage}/>
-      </Route>
+      <Route path="/" component={HomePage} />
+      <Route path="homepage" component={HomePage}/>
+      <Route path="sendMoney" component={SendMoney}/>
+      <Route path="viewTransactions" component={ViewTransactions}/>
     </Router>
   </Provider>),
   document.getElementById('container')

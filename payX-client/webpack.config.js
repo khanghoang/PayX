@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 var query = {
-  presets: ['es2015', 'react']
+  presets: ['es2015', 'react', 'stage-1']
 }
 
 module.exports = {

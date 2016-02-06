@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FieldContainer from '../containers/Field';
+import _ from 'lodash';
 
 export default class SendMoney extends Component {
 
@@ -13,7 +14,15 @@ export default class SendMoney extends Component {
 
   render() {
 
-    let emailRules = [
+    const isRequiredRule =
+      {
+        errorMessage: 'This field is required',
+        validationFunc: (value) => {
+          return value.toString().length;
+        }
+      };
+
+    const emailRules = [
       {
         errorMessage: 'Email is not valid',
         validationFunc: (value) => {
@@ -21,13 +30,18 @@ export default class SendMoney extends Component {
           return emailRegex.test(value);
         }
       },
-      {
-        errorMessage: 'This field is required',
-        validationFunc: (value) => {
-          return value.toString().length;
-        }
-      }
+      isRequiredRule
     ];
+
+    const amountRules = [
+      {
+        errorMessage: 'Not a valid number',
+        validationFunc: (value) => {
+          return _.isNumber(+value) && +value > 0;
+        }
+      },
+      isRequiredRule
+    ]
 
     return (
       <div>
@@ -36,6 +50,12 @@ export default class SendMoney extends Component {
           prefixText='to'
           inputType='text'
           rules={emailRules}
+          isValid={this.onValidChanged}
+        />
+        <FieldContainer
+          prefixText='amount'
+          inputType='number'
+          rules={amountRules}
           isValid={this.onValidChanged}
         />
       </div>

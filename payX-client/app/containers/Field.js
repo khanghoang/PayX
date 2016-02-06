@@ -8,14 +8,16 @@ export default class FieldContainer extends Component {
     this.onValidateInput = this.onValidateInput.bind(this);
     this.state = {
       arrErrorMessages: [],
-      valid: false
+      valid: false,
+      value: null
     }
   }
 
   onValidateInput(e) {
     const rules = this.props.rules;
+    const value = e.target.value;
     const errorMessages = rules.filter((rule) => {
-      if (rule.validationFunc && !rule.validationFunc(e.target.value)) {
+      if (rule.validationFunc && !rule.validationFunc(value)) {
         return rule;
       }
     }).map((rule) => {
@@ -25,7 +27,8 @@ export default class FieldContainer extends Component {
     if (errorMessages.length > 0) {
       this.setState({
         valid: false,
-        arrErrorMessages: errorMessages
+        arrErrorMessages: errorMessages,
+        value: value
       });
 
       this.props.isValid && this.props.isValid(e, false);
@@ -33,7 +36,8 @@ export default class FieldContainer extends Component {
     } else {
       this.setState({
         valid: true,
-        arrErrorMessages: []
+        arrErrorMessages: [],
+        value: value
       });
 
       this.props.isValid && this.props.isValid(e, true);

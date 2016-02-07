@@ -28,7 +28,7 @@ export default class Dropdown extends Component {
       value: e.target.value
     });
 
-    this.props.onChange && this.props.onChange(e);
+    this.props.onChange && this.props.onChange(this.props.name, e.target.value);
   }
 
   render() {
@@ -49,5 +49,6 @@ export default class Dropdown extends Component {
 
 Dropdown.propTypes = {
   datasource: React.PropTypes.arrayOf(React.PropTypes.object),
-  onChange: React.PropTypes.func
+  onChange: React.PropTypes.func,
+  name: React.PropTypes.string.isRequired
 }

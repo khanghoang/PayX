@@ -88,6 +88,9 @@ class SendMoney extends Component {
       case 'amount':
         this.setState({amount: value})
         break;
+      case 'currency':
+        this.setState({currency: value})
+        break;
       case 'message':
         this.setState({message: value});
         break;
@@ -190,8 +193,9 @@ class SendMoney extends Component {
         />
         <Dropdown
           datasource={datasource}
-          onChange={(e) => console.log(e.target.value)}
+          onChange={this.onValueChange}
           ref='dropdown'
+          name='currency'
         />
       <button
         type="button"

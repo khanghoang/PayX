@@ -39,17 +39,18 @@ export default class FieldContainer extends Component {
         valid: false,
         arrErrorMessages: errorMessages,
         value: value
+      }, () => {
+        this.props.isValid && this.props.isValid(e, false);
       });
 
-      this.props.isValid && this.props.isValid(e, false);
     } else {
       this.setState({
         valid: true,
         arrErrorMessages: [],
         value: value
+      }, () => {
+        this.props.isValid && this.props.isValid(e, true);
       });
-
-      this.props.isValid && this.props.isValid(e, true);
     }
 
     this.props.onValueChange && this.props.onValueChange(this.props.name, value);
@@ -58,7 +59,7 @@ export default class FieldContainer extends Component {
   render() {
 
     const errorMessages = this.state.arrErrorMessages.map((message) => {
-      return <div>{message}</div>
+      return <div className='error-message'>{message}</div>
     });
 
     let renderObject = null;
@@ -71,6 +72,7 @@ export default class FieldContainer extends Component {
           onChange={this.onValidateInput}
           onKeyPress={this.onValidateInput}
           onKeyUp={this.onValidateInput}
+          style={this.props.style}
           ref="input"
         />
       );
@@ -82,13 +84,16 @@ export default class FieldContainer extends Component {
           onChange={this.onValidateInput}
           onKeyPress={this.onValidateInput}
           onKeyUp={this.onValidateInput}
+          style={this.props.style}
           ref="input"
         />
       );
     }
 
     return (
-      <div>
+      <div
+        className={this.props.className}
+        >
         {renderObject}
         {errorMessages}
       </div>

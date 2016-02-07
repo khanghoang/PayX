@@ -10,10 +10,12 @@ export default class Dropdown extends Component {
     };
   }
 
-  onComponentUpdate(newState, newProps) {
+  componentDidMount() {
+    const value = this.props.datasource[0];
     this.setState({
-      value: newProps.datasource[0]
+      value: value.value
     });
+    this.props.onChange && this.props.onChange(this.props.name, value);
   }
 
   reset() {
@@ -28,7 +30,10 @@ export default class Dropdown extends Component {
       value: e.target.value
     });
 
-    this.props.onChange && this.props.onChange(this.props.name, e.target.value);
+    const value = e.target.value;
+    const selectedItem = _.find(this.props.datasource, (item) => item.value === value);
+
+    this.props.onChange && this.props.onChange(this.props.name, selectedItem);
   }
 
   render() {

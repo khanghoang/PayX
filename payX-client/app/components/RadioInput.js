@@ -18,7 +18,8 @@ export default class RadioInput extends Component {
   reset() {
     const defaultValue = this.props.datasource ? this.props.datasource[0] : null;
     this.setState({
-      value: defaultValue
+      value: defaultValue,
+      valid: false
     });
   }
 
@@ -30,9 +31,9 @@ export default class RadioInput extends Component {
       valid: true
     }, () => {
       // happen after
-      self.props.onChange && self.props.onChange(self.props.name, value)
+      self.props.onChange && self.props.onChange(self.props.name, value);
+      self.props.isValid && self.props.isValid(true);
     });
-    ;
   }
 
   render() {
@@ -41,7 +42,6 @@ export default class RadioInput extends Component {
         <label>
           <input
             type='radio'
-            className='input-group input-group-btn form-control'
             name={this.props.name}
             onChange={this.onChange}
             value={item.value}
@@ -52,7 +52,7 @@ export default class RadioInput extends Component {
     });
 
     return (
-      <div>
+      <div className='radio'>
         {options}
       </div>
     );

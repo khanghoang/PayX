@@ -1,3 +1,28 @@
 body {
-  margin-top: 50px !important;
+  margin-top: 70px !important;
+  padding: 0 20px;
+}
+
+.error-message {
+  color: red;
+}
+
+.vertical-padding-s {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.currency .input-group {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.currency input,
+.currency select,
+.currency .input-group-addon {
+  border: none;
+}
+
+.currency .input-group-addon {
+  border-right: 1px solid #ccc;
 }

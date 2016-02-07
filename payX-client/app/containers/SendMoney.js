@@ -35,7 +35,7 @@ class SendMoney extends Component {
     this.onClickSend = this.onClickSend.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.state = {
-      currency: 'usd',
+      currency: {},
       amount: null,
       to: null,
       message: null,
@@ -60,7 +60,7 @@ class SendMoney extends Component {
 
   reset() {
     this.setState({
-      currency: 'usd',
+      currency: {},
       amount: null,
       to: null,
       message: null,
@@ -105,7 +105,7 @@ class SendMoney extends Component {
         this.setState({message: value});
         break;
       case 'paymentType':
-        this.setState({transactionType: value});
+        this.setState({paymentType: value});
         break;
     }
   }
@@ -133,6 +133,7 @@ class SendMoney extends Component {
     const currencies = (
       <Dropdown
         datasource={datasourceCurrencies}
+        isValid={this.onValidChanged}
         onChange={this.onValueChange}
         style={{'width': '80px'}}
         ref='dropdown'
@@ -152,15 +153,17 @@ class SendMoney extends Component {
           rules={emailRules}
           isValid={this.onValidChanged}
           onValueChange={this.onValueChange}
+          className='vertical-padding-s'
           name='to'
           ref='to'
         />
         <FieldContainer
-          prefixText={`Amount: ${this.state.currency}`}
+          prefixText={`Amount: ${this.state.currency.symbol}`}
           inputType='number'
           rules={amountRules}
           isValid={this.onValidChanged}
           onValueChange={this.onValueChange}
+          className='vertical-padding-s currency'
           name='amount'
           ref='amount'
           children={currencies}
@@ -170,12 +173,14 @@ class SendMoney extends Component {
           inputType='textarea'
           isValid={this.onValidChanged}
           onValueChange={this.onValueChange}
+          className='vertical-padding-s'
           name='message'
           ref='message'
         />
         <div className="btn-group-vertical" role="group" aria-label="...">
           <RadioInput
             datasource={paymentTypes}
+            isValid={this.onValidChanged}
             onChange={this.onValueChange}
             name='paymentType'
             ref='paymentType'

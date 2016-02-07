@@ -1,8 +1,10 @@
 import "babel-polyfill";
 import ReactDOM from 'react-dom';
 import React from 'react';
+import App from './containers/App';
 import HomePage from './containers/HomePage';
 import SendMoney from './containers/SendMoney';
+import SuccessfulPage from './containers/SuccessfulPage';
 import ViewTransactions from './containers/ViewTransactions';
 import { Provider } from 'react-redux';
 import * as reducers from './reducers';
@@ -30,10 +32,12 @@ middleware.listenForReplays(store);
 ReactDOM.render(
   (<Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={HomePage} />
-      <Route path="homepage" component={HomePage}/>
-      <Route path="sendMoney" component={SendMoney}/>
-      <Route path="viewTransactions" component={ViewTransactions}/>
+      <Route path="/" component={App}>
+        <IndexRoute component={HomePage}/>
+        <Route path="sendMoney" component={SendMoney}/>
+        <Route path="successfulPage" component={SuccessfulPage}/>
+        <Route path="viewTransactions" component={ViewTransactions}/>
+      </Route>
     </Router>
   </Provider>),
   document.getElementById('container')

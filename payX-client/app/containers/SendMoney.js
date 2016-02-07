@@ -2,8 +2,21 @@ import React, {Component} from 'react';
 import FieldContainer from '../containers/Field';
 import Dropdown from '../components/Dropdown';
 import _ from 'lodash';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as sendMoney from '../actions/sendMoney';
 
-export default class SendMoney extends Component {
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(sendMoney, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    response: state.sendMoneyReducer
+  }
+}
+
+class SendMoney extends Component {
 
   constructor() {
     super();
@@ -17,8 +30,12 @@ export default class SendMoney extends Component {
       to: null,
       message: null,
       paymentType: null, // 'SEND' or 'PAY'
-      valid: false
+      valid: false,
     }
+  }
+
+  componentDidMount() {
+    this.reset();
   }
 
   reset() {
@@ -28,7 +45,8 @@ export default class SendMoney extends Component {
       to: null,
       message: null,
       paymentType: null, // 'SEND' or 'PAY'
-      valid: false
+      valid: false,
+      response: {}
     });
 
     _.each([
@@ -48,7 +66,7 @@ export default class SendMoney extends Component {
     ], (total, e) => total && e.state.valid, true);
     this.setState({
       valid: allFieldsValid
-    })
+    });
   }
 
   onValueChange(inputName, value) {
@@ -66,6 +84,7 @@ export default class SendMoney extends Component {
   }
 
   onClickSend() {
+    this.props.sendMoney(this.state);
   }
 
   onClickReset() {
@@ -118,8 +137,28 @@ export default class SendMoney extends Component {
       }
     ];
 
+    let loading = null;
+
+    if (this.props.response.isLoading) {
+      loading = (
+        <div>
+          loading...
+        </div>
+      );
+    }
+
+    if (this.props.response.success) {
+      return (
+        <div>
+          {this.props.response.from} sent to {this.props.response.to}
+          {this.props.response.amount} {this.props.response.currency}
+        </div>
+      )
+    }
+
     return (
       <div>
+        {loading}
         SendMoney
         <FieldContainer
           prefixText='to'
@@ -167,3 +206,5 @@ export default class SendMoney extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SendMoney);

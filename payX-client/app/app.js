@@ -7,6 +7,7 @@ import ViewTransactions from './containers/ViewTransactions';
 import { Provider } from 'react-redux';
 import * as reducers from './reducers';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
 
 import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
@@ -21,6 +22,7 @@ const reducer = combineReducers({
 
 const finalCreateStore = compose(
   applyMiddleware(middleware),
+  applyMiddleware(thunk),
 )(createStore);
 const store = finalCreateStore(reducer);
 middleware.listenForReplays(store);

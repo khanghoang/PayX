@@ -5,9 +5,10 @@ import _ from 'lodash';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sendMoney from '../actions/sendMoney';
+import { routeActions } from 'react-router-redux'
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(sendMoney, dispatch);
+  return bindActionCreators({...sendMoney, ...routeActions}, dispatch);
 }
 
 function mapStateToProps(state) {
@@ -38,6 +39,16 @@ class SendMoney extends Component {
     this.reset();
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {success} = nextProps.response;
+    if (success) {
+      if (!this.redirect) {
+        this.redirect = true;
+        this.props.push('/successfulPage');
+      }
+    }
+  }
+
   reset() {
     this.setState({
       currency: 'usd',
@@ -46,7 +57,6 @@ class SendMoney extends Component {
       message: null,
       paymentType: null, // 'SEND' or 'PAY'
       valid: false,
-      response: {}
     });
 
     _.each([
@@ -64,6 +74,7 @@ class SendMoney extends Component {
       this.refs.amount,
       this.refs.message
     ], (total, e) => total && e.state.valid, true);
+
     this.setState({
       valid: allFieldsValid
     });
@@ -145,15 +156,6 @@ class SendMoney extends Component {
           loading...
         </div>
       );
-    }
-
-    if (this.props.response.success) {
-      return (
-        <div>
-          {this.props.response.from} sent to {this.props.response.to}
-          {this.props.response.amount} {this.props.response.currency}
-        </div>
-      )
     }
 
     return (

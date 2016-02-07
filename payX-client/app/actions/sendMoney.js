@@ -1,18 +1,11 @@
 import fetch from 'superagent';
-// import nock from 'nock';
 
+export const SEND_MONEY = 'SEND_MONEY';
 export const SENDING_MONEY = 'SENDING_MONEY';
+export const SEND_MONEY_FAILED = 'SEND_MONEY_FAILED';
+export const SEND_MONEY_SUCCESSED = 'SEND_MONEY_SUCCESSED';
 
-// nock.post('http://localhost:3000/send_money', {
-//   amount: 10,
-//   from: 'hoangtrieukhang@gmail.com',
-//   to: 'foo@bar.com',
-//   type: 'SEND',
-//   currency: 'usd'
-// })
-// .reply(200, {
-//   foo: 'bar'
-// });
+export const CLEAR_SEND_MONEY = 'CLEAR_SEND_MONEY';
 
 const sendMoney = (data) => {
   return dispatch => {
@@ -21,19 +14,19 @@ const sendMoney = (data) => {
       data: {
         isLoading: true
       }
-    })
+    });
+
     setTimeout(() => {
       dispatch({
-        type:SENDING_MONEY,
+        type:SEND_MONEY_SUCCESSED,
         data: {
-          success: true,
-          isLoading: false,
-          amount: 10,
-          from: 'hoangtrieukhang@gmail.com',
-          to: 'foo@bar.com',
-          type: 'SEND',
-          currency: 'usd',
-          error: null
+          ...data,
+          ...{
+            from: 'khanghoang@gmail.com',
+            success: true,
+            isLoading: false,
+            error: null
+          }
         },
       })
       return;
@@ -68,4 +61,13 @@ const sendMoney = (data) => {
   }
 }
 
-export {sendMoney};
+const clearSendMoney = (data) => {
+  return dispatch => {
+    dispatch({
+      type: CLEAR_SEND_MONEY,
+      data: null
+    })
+  }
+}
+
+export {sendMoney, clearSendMoney};

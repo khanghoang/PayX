@@ -71,8 +71,7 @@ class SendMoney extends Component {
     const allFieldsValid = _.reduce([
       this.refs.dropdown,
       this.refs.to,
-      this.refs.amount,
-      this.refs.message
+      this.refs.amount
     ], (total, e) => total && e.state.valid, true);
 
     this.setState({

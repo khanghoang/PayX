@@ -33,7 +33,7 @@ module.exports = {
         test: /\.html$/,
         loader: "file?name=[name].[ext]",
       },
-      { test: /\.css$/, loader: "style-loader!css-loader?modules"},
+      { test: /\.css$/, loader: "style-loader!css-loader"},
       { test: /\.png$/, loader: "url-loader?limit=100000"},
       { test: /\.(ttf|otf|eot|svg|woff(2)?)$/, loader: "url-loader?limit=100000"},
       { test: /\.jpg$/, loader: "file-loader" }

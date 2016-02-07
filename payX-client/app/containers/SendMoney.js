@@ -7,6 +7,13 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sendMoney from '../actions/sendMoney';
 import { routeActions } from 'react-router-redux'
+import {
+  datasourceCurrencies,
+  paymentTypes,
+  isRequiredRule,
+  emailRules,
+  amountRules
+} from '../data/datasouce';
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({...sendMoney, ...routeActions}, dispatch);
@@ -112,61 +119,6 @@ class SendMoney extends Component {
 
   render() {
 
-    const isRequiredRule =
-      {
-        errorMessage: 'This field is required',
-        validationFunc: (value) => {
-          return value.toString().length;
-        }
-      };
-
-    const emailRules = [
-      {
-        errorMessage: 'Email is not valid',
-        validationFunc: (value) => {
-          const emailRegex = new RegExp("^[a-zA-Z0-9äöüÄÖÜ_+.-]+@[a-zA-Z0-9äöüÄÖÜ][a-zA-Z0-9-äöüÄÖÜ.]+\\.([a-zA-Z]{2,6})$");
-          return emailRegex.test(value);
-        }
-      },
-      isRequiredRule
-    ];
-
-    const amountRules = [
-      {
-        errorMessage: 'Not a valid number',
-        validationFunc: (value) => {
-          return _.isNumber(+value) && +value > 0;
-        }
-      },
-      isRequiredRule
-    ];
-
-    const datasourceCurrencies = [
-      {
-        value: 'usd',
-        displayString: 'USD'
-      },
-      {
-        value: 'eur',
-        displayString: 'EUR'
-      },
-      {
-        value: 'jpy',
-        displayString: 'JPY'
-      }
-    ];
-
-    const paymentTypes = [
-      {
-        value: 'send',
-        displayString: "I'm sending money to family or friend"
-      },
-      {
-        value: 'pay',
-        displayString: "I'm paying for goods or services"
-      }
-    ]
-
     let loading = null;
 
     if (this.props.response.isLoading) {
@@ -199,6 +151,12 @@ class SendMoney extends Component {
           name='amount'
           ref='amount'
         />
+        <Dropdown
+          datasource={datasourceCurrencies}
+          onChange={this.onValueChange}
+          ref='dropdown'
+          name='currency'
+        />
         <FieldContainer
           prefixText='Message (optional): '
           inputType='textarea'
@@ -206,12 +164,6 @@ class SendMoney extends Component {
           onValueChange={this.onValueChange}
           name='message'
           ref='message'
-        />
-        <Dropdown
-          datasource={datasourceCurrencies}
-          onChange={this.onValueChange}
-          ref='dropdown'
-          name='currency'
         />
       <RadioInput
         datasource={paymentTypes}

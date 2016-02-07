@@ -17,6 +17,7 @@ export default class SendMoney extends Component {
       to: null,
       message: null,
       paymentType: null, // 'SEND' or 'PAY'
+      valid: false
     }
   }
 
@@ -27,6 +28,7 @@ export default class SendMoney extends Component {
       to: null,
       message: null,
       paymentType: null, // 'SEND' or 'PAY'
+      valid: false
     });
 
     _.each([
@@ -38,6 +40,15 @@ export default class SendMoney extends Component {
   }
 
   onValidChanged(e, isValue) {
+    const allFieldsValid = _.reduce([
+      this.refs.dropdown,
+      this.refs.to,
+      this.refs.amount,
+      this.refs.message
+    ], (total, e) => total && e.state.valid, true);
+    this.setState({
+      valid: allFieldsValid
+    })
   }
 
   onValueChange(inputName, value) {
@@ -148,7 +159,8 @@ export default class SendMoney extends Component {
       </button>
       <button
         type="button"
-        onClick={this.onClickSend}>
+        onClick={this.onClickSend}
+        disabled={!this.state.valid}>
         Send
       </button>
       </div>

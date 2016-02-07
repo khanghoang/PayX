@@ -5,7 +5,9 @@ export default class Dropdown extends Component {
   constructor() {
     super();
     this.onChange = this.onChange.bind(this);
-    this.state = {};
+    this.state = {
+      valid: true
+    };
   }
 
   onComponentUpdate(newState, newProps) {

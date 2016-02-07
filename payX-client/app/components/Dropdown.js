@@ -15,8 +15,9 @@ export default class Dropdown extends Component {
   }
 
   reset() {
+    const defaultValue = this.props.datasource ? this.props.datasource[0] : null;
     this.setState({
-      value: this.props.datasource[0]
+      value: defaultValue
     });
   }
 

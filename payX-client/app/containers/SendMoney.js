@@ -32,7 +32,8 @@ export default class SendMoney extends Component {
     _.each([
       this.refs.dropdown,
       this.refs.to,
-      this.refs.amount
+      this.refs.amount,
+      this.refs.message
     ], (e) => { e.reset && e.reset() });
   }
 
@@ -46,6 +47,9 @@ export default class SendMoney extends Component {
         break;
       case 'amount':
         this.setState({amount: value})
+        break;
+      case 'message':
+        this.setState({message: value});
         break;
     }
   }
@@ -123,6 +127,14 @@ export default class SendMoney extends Component {
           onValueChange={this.onValueChange}
           name='amount'
           ref='amount'
+        />
+        <FieldContainer
+          prefixText='Message (optional): '
+          inputType='textarea'
+          isValid={this.onValidChanged}
+          onValueChange={this.onValueChange}
+          name='message'
+          ref='message'
         />
         <Dropdown
           datasource={datasource}

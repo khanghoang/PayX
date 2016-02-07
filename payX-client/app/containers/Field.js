@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Field from '../components/Field';
+import TextArea from '../components/TextArea';
 
 export default class FieldContainer extends Component {
 
@@ -58,10 +59,23 @@ export default class FieldContainer extends Component {
 
     const errorMessages = this.state.arrErrorMessages.map((message) => {
       return <div>{message}</div>
-    })
+    });
 
-    return (
-      <div>
+    let renderObject = null;
+
+    if (this.props.inputType === 'textarea') {
+      renderObject = (
+        <TextArea
+          {...this.props}
+          onBlur={this.onValidateInput}
+          onChange={this.onValidateInput}
+          onKeyPress={this.onValidateInput}
+          onKeyUp={this.onValidateInput}
+          ref="input"
+        />
+      );
+    } else {
+      renderObject = (
         <Field
           {...this.props}
           onBlur={this.onValidateInput}
@@ -69,7 +83,13 @@ export default class FieldContainer extends Component {
           onKeyPress={this.onValidateInput}
           onKeyUp={this.onValidateInput}
           ref="input"
-          />
+        />
+      );
+    }
+
+    return (
+      <div>
+        {renderObject}
         {errorMessages}
       </div>
     )
@@ -84,6 +104,10 @@ FieldContainer.propTypes = {
   onKeyUp: React.PropTypes.func,
   onKeyChange: React.PropTypes.func,
   onKeyPress: React.PropTypes.func
+}
+
+FieldContainer.defaultProps = {
+  rules: []
 }
 
 // const rules = [

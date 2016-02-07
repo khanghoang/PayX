@@ -18,16 +18,18 @@ const HomePage = ({push, children}) => {
   return (
     <div className="HomePage">
       HomePage2
-      <button
+      <input
+        className='form-control'
         type="button"
-        onClick={onClickSendMoney}>
-        Send money
-      </button>
-      <button
+        onClick={onClickSendMoney}
+        value='Send money'
+      />
+      <input
+        className='form-control'
         type="button"
-        onClick={onClickViewTransactions}>
-        View transactions history
-      </button>
+        onClick={onClickViewTransactions}
+        value='View transactions history'
+      />
     </div>
   )
 }

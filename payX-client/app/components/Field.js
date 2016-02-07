@@ -26,9 +26,10 @@ export default class Field extends Component {
 
   render() {
     return (
-      <div>
-        <label>{this.props.prefixText}</label>
+      <div className='input-group'>
+        <span className="input-group-addon">{this.props.prefixText}</span>
         <input
+          className='form-control'
           type={this.props.inputType}
           onBlur={this.props.onBlur}
           onKeyUp={this.props.onKeyUp}
@@ -36,6 +37,9 @@ export default class Field extends Component {
           onKeyPress={this.props.onKeyPress}
           value={this.state.value}
           />
+          <div className='input-group-btn'>
+            {this.props.children}
+          </div>
         </div>
     )
   }

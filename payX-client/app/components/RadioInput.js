@@ -38,15 +38,16 @@ export default class RadioInput extends Component {
   render() {
     const options = this.props.datasource.map((item, idx) => {
       return (
-        <div>
+        <label>
           <input
             type='radio'
+            className='input-group input-group-btn form-control'
             name={this.props.name}
             onChange={this.onChange}
             value={item.value}
             checked={item.value === this.state.value}
             />{item.displayString}
-        </div>
+        </label>
           );
     });
 

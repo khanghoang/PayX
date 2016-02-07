@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import FieldContainer from '../containers/Field';
 import Dropdown from '../components/Dropdown';
 import RadioInput from '../components/RadioInput';
+import Header from '../components/Header';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -129,12 +130,24 @@ class SendMoney extends Component {
       );
     }
 
+    const currencies = (
+      <Dropdown
+        datasource={datasourceCurrencies}
+        onChange={this.onValueChange}
+        style={{'width': '80px'}}
+        ref='dropdown'
+        name='currency'
+      />
+    );
+
     return (
       <div>
+        <Header
+          tittle='Send Money'
+        />
         {loading}
-        SendMoney
         <FieldContainer
-          prefixText='to'
+          prefixText='To'
           inputType='text'
           rules={emailRules}
           isValid={this.onValidChanged}
@@ -143,19 +156,14 @@ class SendMoney extends Component {
           ref='to'
         />
         <FieldContainer
-          prefixText='amount'
+          prefixText={`Amount: ${this.state.currency}`}
           inputType='number'
           rules={amountRules}
           isValid={this.onValidChanged}
           onValueChange={this.onValueChange}
           name='amount'
           ref='amount'
-        />
-        <Dropdown
-          datasource={datasourceCurrencies}
-          onChange={this.onValueChange}
-          ref='dropdown'
-          name='currency'
+          children={currencies}
         />
         <FieldContainer
           prefixText='Message (optional): '
@@ -165,23 +173,27 @@ class SendMoney extends Component {
           name='message'
           ref='message'
         />
-      <RadioInput
-        datasource={paymentTypes}
-        onChange={this.onValueChange}
-        name='paymentType'
-        ref='paymentType'
-        />
-      <button
+        <div className="btn-group-vertical" role="group" aria-label="...">
+          <RadioInput
+            datasource={paymentTypes}
+            onChange={this.onValueChange}
+            name='paymentType'
+            ref='paymentType'
+          />
+        </div>
+      <input
+        className='form-control'
         type="button"
-        onClick={this.onClickReset}>
-        Reset
-      </button>
-      <button
+        onClick={this.onClickReset}
+        value='Reset'
+      />
+      <input
+        className='form-control'
         type="button"
         onClick={this.onClickSend}
-        disabled={!this.state.valid}>
-        Send
-      </button>
+        disabled={!this.state.valid}
+        value='Send'
+      />
       </div>
     )
   }

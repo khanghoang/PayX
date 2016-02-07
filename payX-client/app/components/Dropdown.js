@@ -37,7 +37,8 @@ export default class Dropdown extends Component {
     });
 
     return (
-      <select
+      <select className='form-control'
+        {...this.props}
         onChange={this.onChange}
         value={this.state.value}
         >

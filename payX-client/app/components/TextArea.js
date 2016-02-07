@@ -29,6 +29,8 @@ export default class FieldArea extends Component {
       <div>
         <label>{this.props.prefixText}</label>
         <textarea
+          className='form-control'
+          rows="3"
           type={this.props.inputType}
           onBlur={this.props.onBlur}
           onKeyUp={this.props.onKeyUp}

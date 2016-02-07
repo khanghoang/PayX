@@ -6,7 +6,7 @@ import { routeActions } from 'react-router-redux'
 function App({ push, children }) {
   return (
     <div>
-      <div style={{ marginTop: '1.5em' }}>{children}</div>
+      {children}
     </div>
   )
 }

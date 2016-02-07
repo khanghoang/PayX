@@ -35,7 +35,7 @@ class SendMoney extends Component {
     this.onClickSend = this.onClickSend.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.state = {
-      currency: {},
+      currency: datasourceCurrencies[0],
       amount: null,
       to: null,
       message: null,
@@ -60,7 +60,7 @@ class SendMoney extends Component {
 
   reset() {
     this.setState({
-      currency: {},
+      currency: datasourceCurrencies[0],
       amount: null,
       to: null,
       message: null,
@@ -158,7 +158,7 @@ class SendMoney extends Component {
           ref='to'
         />
         <FieldContainer
-          prefixText={`Amount: ${this.state.currency.symbol}`}
+          prefixText={`Amount: ${this.state.currency.symbol} `}
           inputType='number'
           rules={amountRules}
           isValid={this.onValidChanged}

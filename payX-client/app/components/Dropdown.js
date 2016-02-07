@@ -10,14 +10,6 @@ export default class Dropdown extends Component {
     };
   }
 
-  componentDidMount() {
-    const value = this.props.datasource[0];
-    this.setState({
-      value: value.value
-    });
-    this.props.onChange && this.props.onChange(this.props.name, value);
-  }
-
   reset() {
     const defaultValue = this.props.datasource ? this.props.datasource[0] : null;
     this.setState({

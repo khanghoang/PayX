@@ -1,15 +1,18 @@
 export const datasourceCurrencies = [
   {
     value: 'usd',
-    displayString: 'USD'
+    displayString: 'USD',
+    symbol: '$'
   },
   {
     value: 'eur',
-    displayString: 'EUR'
+    displayString: 'EUR',
+    symbol: '€'
   },
   {
     value: 'jpy',
-    displayString: 'JPY'
+    displayString: 'JPY',
+    symbol: '¥'
   }
 ];
 
@@ -28,7 +31,7 @@ export const isRequiredRule =
   {
   errorMessage: 'This field is required',
   validationFunc: (value) => {
-    return value.toString().length;
+    return value.toString(require).length;
   }
 };
 

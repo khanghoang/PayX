@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import FieldContainer from '../containers/Field';
 import Dropdown from '../components/Dropdown';
+import RadioInput from '../components/RadioInput';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -63,15 +64,17 @@ class SendMoney extends Component {
       this.refs.dropdown,
       this.refs.to,
       this.refs.amount,
-      this.refs.message
+      this.refs.message,
+      this.refs.paymentType
     ], (e) => { e.reset && e.reset() });
   }
 
   onValidChanged(e, isValue) {
     const allFieldsValid = _.reduce([
-      this.refs.dropdown,
       this.refs.to,
-      this.refs.amount
+      this.refs.amount,
+      this.refs.dropdown,
+      this.refs.paymentType
     ], (total, e) => total && e.state.valid, true);
 
     this.setState({
@@ -92,6 +95,9 @@ class SendMoney extends Component {
         break;
       case 'message':
         this.setState({message: value});
+        break;
+      case 'paymentType':
+        this.setState({transactionType: value});
         break;
     }
   }
@@ -135,7 +141,7 @@ class SendMoney extends Component {
       isRequiredRule
     ];
 
-    const datasource = [
+    const datasourceCurrencies = [
       {
         value: 'usd',
         displayString: 'USD'
@@ -149,6 +155,17 @@ class SendMoney extends Component {
         displayString: 'JPY'
       }
     ];
+
+    const paymentTypes = [
+      {
+        value: 'send',
+        displayString: "I'm sending money to family or friend"
+      },
+      {
+        value: 'pay',
+        displayString: "I'm paying for goods or services"
+      }
+    ]
 
     let loading = null;
 
@@ -191,10 +208,16 @@ class SendMoney extends Component {
           ref='message'
         />
         <Dropdown
-          datasource={datasource}
+          datasource={datasourceCurrencies}
           onChange={this.onValueChange}
           ref='dropdown'
           name='currency'
+        />
+      <RadioInput
+        datasource={paymentTypes}
+        onChange={this.onValueChange}
+        name='paymentType'
+        ref='paymentType'
         />
       <button
         type="button"

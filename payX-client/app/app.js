@@ -1,4 +1,5 @@
 import "babel-polyfill";
+import 'bootstrap/dist/css/bootstrap.css';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import App from './containers/App';

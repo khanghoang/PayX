@@ -94,7 +94,8 @@ body {
 }
 
 .transaction-item {
-  /* height: 100px; */
+  height: 40px;
+  line-height: 40px;
 }
 
 .transactions-history {

@@ -21,6 +21,7 @@ class ViewTransactions extends Component {
 
   constructor() {
     super();
+    this.onClickBackButton = this.onClickBackButton.bind(this);
   }
 
   componentWillUpdate(newState, newProps) {
@@ -32,7 +33,20 @@ class ViewTransactions extends Component {
     this.props.fetchTransactions();
   }
 
+  onClickBackButton() {
+    this.props.push('/');
+  }
+
   render() {
+    const bottomButton = [
+      <input
+        className='form-control btn-warning'
+        type="button"
+        onClick={this.onClickBackButton}
+        value='Back'
+      />
+    ];
+
     return (
       <div>
         <Header
@@ -47,6 +61,7 @@ class ViewTransactions extends Component {
             </div>
           )}
         <Footer
+          children={bottomButton}
           />
       </div>
     )

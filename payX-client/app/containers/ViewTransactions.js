@@ -34,9 +34,21 @@ class ViewTransactions extends Component {
 
   render() {
     return (
-      <TransactionList
-        datasource={this.props.data.transactions}
+      <div>
+        <Header
+          tittle='Transactions History'
         />
+        <TransactionList
+          datasource={this.props.data.transactions}
+          />
+          {this.props.data.isLoading && (
+            <div>
+              Loading...
+            </div>
+          )}
+        <Footer
+          />
+      </div>
     )
   }
 }

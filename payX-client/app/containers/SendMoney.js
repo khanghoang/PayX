@@ -3,6 +3,7 @@ import FieldContainer from '../containers/Field';
 import Dropdown from '../components/Dropdown';
 import RadioInput from '../components/RadioInput';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -141,6 +142,24 @@ class SendMoney extends Component {
       />
     );
 
+    const sendButtonClasses = 'form-control send-button ' + (!this.state.valid ? 'disabled' : 'btn-primary');
+
+    const bottomButtons = [
+      <input
+        className='form-control reset-button btn-warning'
+        type="button"
+        onClick={this.onClickReset}
+        value='Reset'
+      />,
+      <input
+        className={sendButtonClasses}
+        type="button"
+        onClick={this.onClickSend}
+        disabled={!this.state.valid}
+        value='Send'
+      />
+    ];
+
     return (
       <div>
         <Header
@@ -186,19 +205,9 @@ class SendMoney extends Component {
             ref='paymentType'
           />
         </div>
-      <input
-        className='form-control'
-        type="button"
-        onClick={this.onClickReset}
-        value='Reset'
-      />
-      <input
-        className='form-control'
-        type="button"
-        onClick={this.onClickSend}
-        disabled={!this.state.valid}
-        value='Send'
-      />
+      <Footer
+        children={bottomButtons}
+        />
       </div>
     )
   }

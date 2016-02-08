@@ -20,7 +20,11 @@ const fetchTransactions = () => {
         type:FETCH_TRANSACTION_SUCCESSED,
         data: {
           isLoading: false,
-          transactions: data
+          transactions: [
+            ...data,
+            ...data,
+            ...data,
+          ]
         },
       })
       return;

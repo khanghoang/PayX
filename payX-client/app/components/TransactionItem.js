@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class TransactionItem extends Component {
   render() {
     return (
-      <div>
+      <div className='transaction-item'>
         information
       </div>
     );

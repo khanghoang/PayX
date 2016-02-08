@@ -52,14 +52,16 @@ class ViewTransactions extends Component {
         <Header
           tittle='Transactions History'
         />
-        <TransactionList
-          datasource={this.props.data.transactions}
-          />
-          {this.props.data.isLoading && (
-            <div>
-              Loading...
-            </div>
-          )}
+        <div className='transactions-history'>
+          <TransactionList
+            datasource={this.props.data.transactions}
+            />
+            {this.props.data.isLoading && (
+              <div>
+                Loading...
+              </div>
+              )}
+        </div>
         <Footer
           children={bottomButton}
           />

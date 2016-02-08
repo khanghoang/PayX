@@ -91,3 +91,7 @@ body {
 .currency .input-group-addon {
   border-right: 1px solid #ccc;
 }
+
+.transaction-item {
+  height: 100px;
+}

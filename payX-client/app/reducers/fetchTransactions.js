@@ -18,7 +18,8 @@ const fetchTransactionsReducer = (state = initialState, action) => {
       break;
     case FETCH_TRANSACTION_SUCCESSED:
       const transactions = [...state.transactions, ...action.data.transactions];
-      return {...state, ...{isLoading: false}, ...{transactions: transactions}};
+      let newState = {...state, ...{isLoading: false}, ...action.data, ...{transactions: transactions}};
+      return newState;
       break;
     case FLUSH_TRANSACTIONS:
       return {...state, ...{transactions: []}}

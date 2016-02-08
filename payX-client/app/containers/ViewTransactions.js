@@ -24,6 +24,7 @@ class ViewTransactions extends Component {
     super();
     this.onClickBackButton = this.onClickBackButton.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.currentPage = 0;
   }
 
   componentDidMount() {
@@ -46,13 +47,14 @@ class ViewTransactions extends Component {
     const scrollTop = body.scrollTop;
     const frameHeight = body.offsetHeight;
     const totalHeight = body.scrollHeight;
-    const hasNextPage = true;
+    const hasNextPage = this.currentPage < this.props.data.totalPage;
 
     if (scrollTop + frameHeight + threshold > totalHeight
         && !this.props.data.isLoading
         && hasNextPage)
       {
-      this.props.fetchTransactions();
+      this.currentPage = ++this.currentPage;
+      this.props.fetchTransactions(this.currentPage);
     }
 
     // console.log(`scrollTop ${scrollTop} window height ${frameHeight} total height ${totalHeight}`);

@@ -21,6 +21,9 @@ const fetchTransactions = (page = 0) => {
         type:FETCH_TRANSACTION_SUCCESSED,
         data: {
           isLoading: false,
+          currentPage: page,
+          totalPage: 5,
+          itemPerPage: 10,
           transactions: [
             ...data,
             ...data,

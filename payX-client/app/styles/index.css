@@ -163,3 +163,7 @@ body {
   border-color: #ddd;
   box-shadow: none;
 }
+
+.navbar-brand {
+  color: white !important;
+}

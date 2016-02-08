@@ -125,8 +125,6 @@ class SendMoney extends Component {
 
   render() {
 
-    let loading = null;
-
     if (this.props.response.isLoading) {
       loading = (
         <div className='loading row'>
@@ -177,7 +175,6 @@ class SendMoney extends Component {
         <Header
           tittle='Send Money'
         />
-        {loading}
         <FieldContainer
           prefixText='To'
           inputType='text'

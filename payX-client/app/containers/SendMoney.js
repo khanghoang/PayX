@@ -125,8 +125,11 @@ class SendMoney extends Component {
 
     if (this.props.response.isLoading) {
       loading = (
-        <div>
+        <div className='loading row'>
+          <div>
           loading...
+          </div>
+          <div className='loading-indicator col-xs-5 vcenter'></div>
         </div>
       );
     }

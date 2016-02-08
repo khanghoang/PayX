@@ -5,6 +5,7 @@ import * as sendMoney from '../actions/sendMoney';
 import { routeActions } from 'react-router-redux'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import _ from 'lodash';
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({...sendMoney, ...routeActions}, dispatch);
@@ -32,7 +33,7 @@ class SuccessfulPage extends Component {
     this.props.push('/viewTransactions')
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const {success} = this.props.response;
     if (!success) {
       this.props.push('/')
@@ -56,14 +57,26 @@ class SuccessfulPage extends Component {
       />
     ];
 
+    const symbol = _.get(this.props, 'response.currency.symbol');
+    const to = _.get(this.props, 'response.to');
+    const amount = _.get(this.props, 'response.amount');
+
+    if (!symbol || !to || !amount) {
+      return null;
+    }
+
+
     return (
       <div>
         <Header
           tittle='Send Money'
         />
-        <div>
-          {`${this.props.response.from} sent to ${this.props.response.to}
-            ${this.props.response.currency.symbol}${this.props.response.amount} `}
+        <div className='success-page-container'>
+          <b>{`You have sent ${this.props.response.currency.symbol}${this.props.response.amount}
+             to ${this.props.response.to}`}</b>
+          <div className='row success-check vertical-padding-s'>
+            <span className="glyphicon glyphicon-ok" aria-hidden="false"></span>
+          </div>
         </div>
         <Footer
           children={bottomButtons}

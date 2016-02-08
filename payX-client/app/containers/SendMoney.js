@@ -209,6 +209,7 @@ class SendMoney extends Component {
           name='message'
           ref='message'
         />
+        <b>What's this payment for?</b>
         <RadioInput
           datasource={paymentTypes}
           isValid={this.onValidChanged}

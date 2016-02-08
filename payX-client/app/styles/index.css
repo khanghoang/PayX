@@ -15,14 +15,26 @@ body {
   margin-bottom: 15px;
 }
 
-.reset-button {
-  float: left;
-  width: 100px;
+.fr {
+  float: right;
 }
 
-.send-button {
+.fl {
+  float: left;
+}
+
+.bottom-left-button {
+  float: left;
+  min-width: 70px;
+  padding: 0 15px;
+  width: auto !important;
+}
+
+.bottom-right-button {
   float: right;
-  width: 100px;
+  min-width: 70px;
+  padding: 0 15px;
+  width: auto !important;
 }
 
 .footer {

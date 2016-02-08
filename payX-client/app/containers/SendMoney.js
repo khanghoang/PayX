@@ -142,11 +142,11 @@ class SendMoney extends Component {
       />
     );
 
-    const sendButtonClasses = 'form-control send-button ' + (!this.state.valid ? 'disabled' : 'btn-primary');
+    const sendButtonClasses = 'form-control bottom-right-button ' + (!this.state.valid ? 'disabled' : 'btn-primary');
 
     const bottomButtons = [
       <input
-        className='form-control reset-button btn-warning'
+        className='form-control bottom-left-button btn-warning'
         type="button"
         onClick={this.onClickReset}
         value='Reset'

@@ -2,22 +2,26 @@ import fetch from 'superagent';
 
 export const FETCH_TRANSACTION = 'FETCH_TRANSACTION';
 export const FETCHING_TRANSACTION = 'FETCHING_TRANSACTION';
-export const FETCHING_TRANSACTION_FAILED = 'FETCHING_TRANSACTION_FAILED';
-export const FETCHING_TRANSACTION_SUCCESSED = 'FETCHING_TRANSACTION_SUCCESSED';
+export const FETCH_TRANSACTION_FAILED = 'FETCH_TRANSACTION_FAILED';
+export const FETCH_TRANSACTION_SUCCESSED = 'FETCH_TRANSACTION_SUCCESSED';
 
 const fetchTransactions = () => {
   return dispatch => {
     dispatch({
       type: FETCHING_TRANSACTION,
       data: {
-        isLoading: true
+        isLoading: true,
+        transactions: []
       }
     });
 
     setTimeout(() => {
       dispatch({
-        type:FETCHING_TRANSACTION_SUCCESSED,
-        data: data,
+        type:FETCH_TRANSACTION_SUCCESSED,
+        data: {
+          isLoading: false,
+          transactions: data
+        },
       })
       return;
     }, 3000);

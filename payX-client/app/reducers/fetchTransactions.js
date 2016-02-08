@@ -1,26 +1,27 @@
 import {
-FETCH_TRANSACTION,
-FETCHING_TRANSACTION,
-FETCHING_TRANSACTION_FAILED,
-FETCHING_TRANSACTION_SUCCESSED,
-} from '../actions/sendMoney';
+  FETCH_TRANSACTION,
+  FETCHING_TRANSACTION,
+  FETCH_TRANSACTION_FAILED,
+  FETCH_TRANSACTION_SUCCESSED,
+} from '../actions/fetchTransactions';
 import _ from 'lodash';
 
-const sendMoneyReducer = (state = [], action) => {
+const initialState = {
+  transactions: []
+}
+
+const fetchTransactionsReducer = (state = initialState, action) => {
   switch(action.type) {
     case FETCHING_TRANSACTION:
       return {...state, ...action.data};
       break;
-    case SEND_MONEY_SUCCESSED:
-      const transactions = [...state.transactions, ...actions.data.transactions];
+    case FETCH_TRANSACTION_SUCCESSED:
+      const transactions = [...state.transactions, ...action.data.transactions];
       return {...state, ...{isLoading: false}, ...{transactions: transactions}};
-      break;
-    case CLEAR_SEND_MONEY:
-      return {};
       break;
     default:
       return state;
   }
 }
 
-export default sendMoneyReducer;
+export default fetchTransactionsReducer;

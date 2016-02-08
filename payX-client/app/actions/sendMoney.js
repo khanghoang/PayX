@@ -30,7 +30,7 @@ const sendMoney = (data) => {
         },
       })
       return;
-    }, 1000);
+    }, 3000);
 
     // fetch.post('http://localhost:3000/send_money')
     // .send({

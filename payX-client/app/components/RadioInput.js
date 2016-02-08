@@ -23,11 +23,10 @@ export default class RadioInput extends Component {
     });
   }
 
-  onChange(e) {
+  onChange(value) {
     const self = this;
-    const value = e.target.value;
     this.setState({
-      value: e.target.value,
+      value: value,
       valid: true
     }, () => {
       // happen after
@@ -39,20 +38,19 @@ export default class RadioInput extends Component {
   render() {
     const options = this.props.datasource.map((item, idx) => {
       return (
-        <label>
-          <input
-            type='radio'
-            name={this.props.name}
-            onChange={this.onChange}
-            value={item.value}
-            checked={item.value === this.state.value}
-            />{item.displayString}
-        </label>
-          );
+        <button type="button" className="payment-type-option form-control btn btn-default"
+          onClick={() => { this.onChange(item.value)}}>
+          {item.displayString}
+          {
+            item.value === this.state.value &&
+              <span className="fr glyphicon glyphicon-ok" aria-hidden="false"></span>
+              }
+          </button>
+      );
     });
 
     return (
-      <div className='radio'>
+      <div className="payment-type-options radio btn-group-vertical" role="group">
         {options}
       </div>
     );

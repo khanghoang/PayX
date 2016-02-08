@@ -115,3 +115,11 @@ body {
   text-align: center;
   height: 30px;
 }
+
+.payment-type-option {
+  text-align: left;
+}
+
+.payment-type-options {
+  display: block !important;
+}

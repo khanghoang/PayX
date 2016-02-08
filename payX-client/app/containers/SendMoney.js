@@ -200,15 +200,13 @@ class SendMoney extends Component {
           name='message'
           ref='message'
         />
-        <div className="btn-group-vertical" role="group" aria-label="...">
-          <RadioInput
-            datasource={paymentTypes}
-            isValid={this.onValidChanged}
-            onChange={this.onValueChange}
-            name='paymentType'
-            ref='paymentType'
-          />
-        </div>
+        <RadioInput
+          datasource={paymentTypes}
+          isValid={this.onValidChanged}
+          onChange={this.onValueChange}
+          name='paymentType'
+          ref='paymentType'
+        />
       <Footer
         children={bottomButtons}
         />

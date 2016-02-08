@@ -47,6 +47,7 @@ class SendMoney extends Component {
 
   componentDidMount() {
     this.reset();
+    this.props.clearSendMoney();
   }
 
   componentWillReceiveProps(nextProps) {

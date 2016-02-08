@@ -26,9 +26,9 @@ class SuccessfulPage extends Component {
   render() {
     return (
       <div>
-        {this.props.response.from} sent to {this.props.response.to}
-        {this.props.response.amount} {this.props.response.currency}
-        </div>
+        {`${this.props.response.from} sent to ${this.props.response.to}
+        ${this.props.response.currency.symbol}${this.props.response.amount} `}
+      </div>
     )
   }
 }

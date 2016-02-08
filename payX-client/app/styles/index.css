@@ -109,3 +109,8 @@ body {
 .table tr:nth-child(odd){
    background-color: #eee;
 }
+
+.transactions-list-load-more {
+  text-align: center;
+  height: 40px;
+}

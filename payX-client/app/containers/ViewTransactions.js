@@ -81,7 +81,7 @@ class ViewTransactions extends Component {
           <TransactionList
             datasource={this.props.data.transactions}/>
           {this.props.data.isLoading && (
-            <div>
+            <div className='transactions-list-load-more'>
               Loading...
             </div>
           )}

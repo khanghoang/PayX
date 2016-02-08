@@ -3,17 +3,21 @@ import TransactionItem from './TransactionItem';
 
 export default class TransactionList extends Component {
   render() {
-    const rows = this.props.datasource.map((item) => {
+    const rows = this.props.datasource.map((item, idx) => {
       return (
         <TransactionItem
           transaction={item}
+          key={idx}
+          index={idx}
         />
       )
     });
     return (
-      <div>
-        {rows}
-      </div>
+      <table className='table'>
+        <tbody>
+          {rows}
+        </tbody>
+      </table>
     );
   }
 }

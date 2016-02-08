@@ -105,3 +105,7 @@ body {
   right: 0;
   overflow: scroll;
 }
+
+.table tr:nth-child(odd){
+   background-color: #eee;
+}

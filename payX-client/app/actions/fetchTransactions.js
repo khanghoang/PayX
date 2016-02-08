@@ -5,13 +5,14 @@ export const FETCHING_TRANSACTION = 'FETCHING_TRANSACTION';
 export const FETCH_TRANSACTION_FAILED = 'FETCH_TRANSACTION_FAILED';
 export const FETCH_TRANSACTION_SUCCESSED = 'FETCH_TRANSACTION_SUCCESSED';
 
-const fetchTransactions = () => {
+export const FLUSH_TRANSACTIONS = 'FLUSH_TRANSACTIONS';
+
+const fetchTransactions = (page = 0) => {
   return dispatch => {
     dispatch({
       type: FETCHING_TRANSACTION,
       data: {
-        isLoading: true,
-        transactions: []
+        isLoading: true
       }
     });
 
@@ -32,14 +33,25 @@ const fetchTransactions = () => {
   }
 }
 
-export {fetchTransactions};
+const flushTransactionCache = () => {
+  return dispatch => {
+    dispatch({
+      type: FLUSH_TRANSACTIONS
+    });
+  }
+}
+
+export {fetchTransactions, flushTransactionCache};
 
 const data = [
   {
     createdAt: new Date(),
     success: true,
     from: 'hoangtrieukhang@gmail.com',
-    currency: 'usd',
+    currency: {
+      value: 'usd',
+      symbol: '$'
+    },
     amount: 10,
     to: '1 - someone@gmail.com',
     message: 'foo bar',
@@ -49,7 +61,10 @@ const data = [
     createdAt: new Date(),
     success: true,
     from: 'hoangtrieukhang@gmail.com',
-    currency: 'usd',
+    currency: {
+      value: 'usd',
+      symbol: '$'
+    },
     amount: 10,
     to: '2 - someone@gmail.com',
     message: 'foo bar',
@@ -59,7 +74,10 @@ const data = [
     createdAt: new Date(),
     success: true,
     from: 'hoangtrieukhang@gmail.com',
-    currency: 'usd',
+    currency: {
+      value: 'usd',
+      symbol: '$'
+    },
     amount: 10,
     to: '3 - someone@gmail.com',
     message: 'foo bar',
@@ -69,7 +87,10 @@ const data = [
     createdAt: new Date(),
     success: true,
     from: 'hoangtrieukhang@gmail.com',
-    currency: 'usd',
+    currency: {
+      value: 'usd',
+      symbol: '$'
+    },
     amount: 10,
     to: '4 - someone@gmail.com',
     message: 'foo bar',

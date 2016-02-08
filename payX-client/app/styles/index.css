@@ -1,5 +1,6 @@
 body {
   margin-top: 70px !important;
+  overflow: scroll;
 }
 
 .loading {
@@ -32,7 +33,7 @@ body {
 }
 
 #container {
-  padding: 0 20px;
+  padding: 0 20px 80px 20px;
 }
 
 .error-message {
@@ -93,5 +94,14 @@ body {
 }
 
 .transaction-item {
-  height: 100px;
+  /* height: 100px; */
+}
+
+.transactions-history {
+  top: 50px;
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  overflow: scroll;
 }

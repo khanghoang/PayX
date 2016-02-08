@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -22,15 +23,39 @@ class ViewTransactions extends Component {
   constructor() {
     super();
     this.onClickBackButton = this.onClickBackButton.bind(this);
-  }
-
-  componentWillUpdate(newState, newProps) {
-    // debugger;
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
-    // debugger;
     this.props.fetchTransactions();
+    this.scrollDOMObject = ReactDOM.findDOMNode(this.refs.scrollNode);
+    this.scrollDOMObject.addEventListener('scroll', _.throttle(this.handleScroll, 100));
+  }
+
+  componentWillUnmount() {
+    this.scrollDOMObject.removeEventListener('scroll', this.handleScroll);
+    this.props.flushTransactionCache();
+  }
+
+  componentDidUpdate() {
+  }
+
+  handleScroll(e) {
+    const threshold = 300;
+    const body = e.srcElement;
+    const scrollTop = body.scrollTop;
+    const frameHeight = body.offsetHeight;
+    const totalHeight = body.scrollHeight;
+    const hasNextPage = true;
+
+    if (scrollTop + frameHeight + threshold > totalHeight
+        && !this.props.data.isLoading
+        && hasNextPage)
+      {
+      this.props.fetchTransactions();
+    }
+
+    // console.log(`scrollTop ${scrollTop} window height ${frameHeight} total height ${totalHeight}`);
   }
 
   onClickBackButton() {
@@ -52,15 +77,14 @@ class ViewTransactions extends Component {
         <Header
           tittle='Transactions History'
         />
-        <div className='transactions-history'>
+        <div className='transactions-history' ref='scrollNode'>
           <TransactionList
-            datasource={this.props.data.transactions}
-            />
-            {this.props.data.isLoading && (
-              <div>
-                Loading...
-              </div>
-              )}
+            datasource={this.props.data.transactions}/>
+          {this.props.data.isLoading && (
+            <div>
+              Loading...
+            </div>
+          )}
         </div>
         <Footer
           children={bottomButton}

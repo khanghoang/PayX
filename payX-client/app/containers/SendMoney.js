@@ -95,7 +95,10 @@ class SendMoney extends Component {
   onValueChange(inputName, value) {
     switch(inputName) {
       case 'to':
-        this.setState({to: value})
+        this.setState({
+          to: value,
+          emailValid: this.refs.to.state.valid
+        })
         break;
       case 'amount':
         this.setState({amount: value})
@@ -164,6 +167,11 @@ class SendMoney extends Component {
       />
     ];
 
+    const shouldAppear = this.state.emailValid ? "glyphicon-ok" : "";
+    const validCheck = (
+      <span className={"send-money-check input-group-addon glyphicon " + shouldAppear} aria-hidden="false"></span>
+    );
+
     return (
       <div>
         <Header
@@ -176,9 +184,10 @@ class SendMoney extends Component {
           rules={emailRules}
           isValid={this.onValidChanged}
           onValueChange={this.onValueChange}
-          className='vertical-padding-s'
+          className='vertical-padding-s send-money-email'
           name='to'
           ref='to'
+          children={validCheck}
         />
         <FieldContainer
           prefixText={`Amount: ${this.state.currency.symbol} `}

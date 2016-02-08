@@ -123,3 +123,37 @@ body {
 .payment-type-options {
   display: block !important;
 }
+
+.success-check {
+  font-size: 60px;
+  text-align: center;
+  color: green;
+}
+
+.success-page-container {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.send-money-check {
+  background: none;
+  border: none;
+  color: green;
+  width: 40px;
+  display: block;
+  border: none !important;
+}
+
+.send-money-email .input-group{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.send-money-email .input-group-addon {
+  border: none;
+  border-right: 1px solid #ddd;
+}
+
+.send-money-email input.form-control{
+  border: none;
+}

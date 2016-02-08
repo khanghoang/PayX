@@ -157,3 +157,9 @@ body {
 .send-money-email input.form-control{
   border: none;
 }
+
+.form-control:focus {
+  outline: 0 !important;
+  border-color: #ddd;
+  box-shadow: none;
+}

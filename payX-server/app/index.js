@@ -22,16 +22,16 @@ const loadFile = (path) => {
 
 const paginate = (arrData, page, itemsPerPage = 10) => {
   let transactions = _.filter(arrData, (item, idx) => {
-    return Math.floor(idx / itemsPerPage) === page;
+    return Math.floor(idx / itemsPerPage) + 1 === page;
   });
 
   let totalPages = Math.ceil(arrData.length / itemsPerPage);
 
   return {
     current_page: page,
-    total_pages: totalPages,
+    total_pages: +totalPages,
     transactions: transactions,
-    per_page: itemsPerPage,
+    per_page: +itemsPerPage,
     success: true
   };
 }
@@ -48,6 +48,9 @@ server.post('/send_money', async (req, res) => {
 
 server.get('/transactions_history', async (req, res) => {
 
+  let page = _.get(req, 'query.page', 0);
+  let itemsPerPage = _.get(req, 'query.per_page', 10);
+
   let transactions = await loadFile(path.join(__dirname, '../app/data', 'transactions.json'));
 
   if (transactions instanceof Error) {
@@ -59,7 +62,7 @@ server.get('/transactions_history', async (req, res) => {
     return;
   }
 
-  res.status(200).json(paginate(JSON.parse(transactions), 0, 10));
+  res.status(200).json(paginate(JSON.parse(transactions), +page, +itemsPerPage));
 });
 
 const port = 3000;

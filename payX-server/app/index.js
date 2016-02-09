@@ -47,9 +47,8 @@ server.use(bodyParser.urlencoded({extended: true}));
 
 server.post('/send_money', async (req, res) => {
   res.status(200).json({
-    ...req.body,
     ...{success: true},
-    ...{createdAt: new Date()}
+    ...{req.body}
   });
 });
 

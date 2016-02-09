@@ -16,48 +16,47 @@ const sendMoney = (data) => {
       }
     });
 
-    setTimeout(() => {
-      dispatch({
-        type:SEND_MONEY_SUCCESSED,
-        data: {
-          ...data,
-          ...{
-            from: 'khanghoang@gmail.com',
-            success: true,
-            isLoading: false,
-            error: null
-          }
-        },
-      })
-      return;
-    }, 3000);
+    fetch.post('http://localhost:3000/send_money')
+    .send({
+      ...data,
+      ...{
+      from: 'hoangtrieukhang@gmail.com',
+      }
+    })
+    .end((err, res) => {
+      if(err) {
+        dispatch({
+          type:SEND_MONEY_SUCCESSED,
+          isLoading: false,
+          data: JSON.parse(res.text),
+          error: null
+        })
+        return;
+      } else {
+        dispatch({
+          type:SEND_MONEY_FAILED,
+          isLoading: false,
+          error: error
+        });
+      }
+    });
 
-    // fetch.post('http://localhost:3000/send_money')
-    // .send({
-    //   amount: 10,
-    //   from: 'hoangtrieukhang@gmail.com',
-    //   to: 'foo@bar.com',
-    //   type: 'SEND',
-    //   currency: 'usd'
-    // })
-    // .end((err, res) => {
-    //   if(err) {
-    //     dispatch({
-    //       type:SENDING_MONEY,
-    //       isLoading: false,
-    //       data: null,
-    //       error: err
-    //     })
-    //     return;
-    //   } else {
-    //     dispatch({
-    //       type:SENDING_MONEY,
-    //       isLoading: false,
-    //       data: JSON.parse(res),
-    //       error: null
-    //     });
-    //   }
-    // });
+    // setTimeout(() => {
+    //   dispatch({
+    //     type:SEND_MONEY_SUCCESSED,
+    //     data: {
+    //       ...data,
+    //       ...{
+    //         from: 'khanghoang@gmail.com',
+    //         success: true,
+    //         isLoading: false,
+    //         error: null
+    //       }
+    //     },
+    //   })
+    //   return;
+    // }, 3000);
+
   }
 }
 

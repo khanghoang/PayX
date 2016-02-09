@@ -52,7 +52,7 @@ class SendMoney extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {success} = nextProps.response;
-    if (success) {
+    if (typeof success !== 'undefined') {
       if (!this.redirect) {
         this.redirect = true;
         this.props.push('/successfulPage');

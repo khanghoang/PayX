@@ -15,6 +15,10 @@ const sendMoneyReducer = (state = {}, action) => {
     case SEND_MONEY_SUCCESSED:
       return {...state, ...action.data};
       break;
+    case SEND_MONEY_FAILED:
+      debugger;
+      return {...state, ...action.data};
+      break;
     case CLEAR_SEND_MONEY:
       return {};
       break;

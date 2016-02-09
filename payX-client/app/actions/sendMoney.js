@@ -38,8 +38,11 @@ const sendMoney = (data) => {
       } else {
         dispatch({
           type:SEND_MONEY_FAILED,
-          isLoading: false,
-          error: err
+          data: {
+            isLoading: false,
+            error: err,
+            success: false
+          }
         });
       }
     });

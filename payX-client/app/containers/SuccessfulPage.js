@@ -35,9 +35,38 @@ class SuccessfulPage extends Component {
 
   componentWillMount() {
     const {success} = this.props.response;
-    if (!success) {
-      this.props.push('/')
+    if (typeof success === 'undefined') {
+      this.props.push('/');
     }
+  }
+
+  successfulScreen() {
+    const symbol = _.get(this.props, 'response.symbol');
+    const to = _.get(this.props, 'response.to');
+    const amount = _.get(this.props, 'response.amount');
+
+    if (!symbol || !to || !amount) {
+      return null;
+    }
+
+    return (
+      <div>
+        <b>{`You have sent ${symbol}${amount} to ${to}`}</b>
+        <div className='row success-check vertical-padding-s'>
+          <span className="glyphicon glyphicon-ok" aria-hidden="false"></span>
+        </div>
+      </div>
+    )
+  }
+
+  errorScreen() {
+    return (
+      <div>
+        <b>There is an error when sending the money</b>
+        <br/>
+        <b>Please go back and try again.</b>
+      </div>
+    )
   }
 
   render() {
@@ -57,13 +86,7 @@ class SuccessfulPage extends Component {
       />
     ];
 
-    const symbol = _.get(this.props, 'response.symbol');
-    const to = _.get(this.props, 'response.to');
-    const amount = _.get(this.props, 'response.amount');
-
-    if (!symbol || !to || !amount) {
-      return null;
-    }
+    const content = this.props.response.success ? this.successfulScreen() : this.errorScreen();
 
     return (
       <div>
@@ -71,11 +94,7 @@ class SuccessfulPage extends Component {
           tittle='Send Money'
         />
         <div className='success-page-container'>
-          <b>{`You have sent ${symbol}${amount}
-             to ${to}`}</b>
-          <div className='row success-check vertical-padding-s'>
-            <span className="glyphicon glyphicon-ok" aria-hidden="false"></span>
-          </div>
+          {content}
         </div>
         <Footer
           children={bottomButtons}

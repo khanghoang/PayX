@@ -94,8 +94,13 @@ body {
 }
 
 .transaction-item {
-  height: 40px;
-  line-height: 40px;
+  line-height: 30px;
+  padding: 0 0 0 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.transaction-item > div {
+  padding: 5px;
 }
 
 .transactions-history {
@@ -171,4 +176,25 @@ body {
 .transaction-item td {
   max-width: 140px;
   overflow: hidden;
+}
+
+.email-cell {
+  overflow: hidden;
+  padding-right: 25px;
+}
+
+.even {
+   background-color: #eee;
+}
+
+.transaction-description {
+  line-height: 20px;
+}
+
+.transaction-description div {
+  padding: 0 !important;
+}
+
+.text-left {
+  text-align: left;
 }

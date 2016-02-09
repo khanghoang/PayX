@@ -13,11 +13,9 @@ export default class TransactionList extends Component {
       )
     });
     return (
-      <table className='table'>
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
+      <div className='table'>
+        {rows}
+      </div>
     );
   }
 }

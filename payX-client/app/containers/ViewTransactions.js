@@ -24,11 +24,11 @@ class ViewTransactions extends Component {
     super();
     this.onClickBackButton = this.onClickBackButton.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-    this.currentPage = 0;
+    this.currentPage = 1;
   }
 
   componentDidMount() {
-    this.props.fetchTransactions();
+    this.props.fetchTransactions(this.currentPage, 20);
     this.scrollDOMObject = ReactDOM.findDOMNode(this.refs.scrollNode);
     this.scrollDOMObject.addEventListener('scroll', _.throttle(this.handleScroll, 100));
   }
@@ -47,14 +47,14 @@ class ViewTransactions extends Component {
     const scrollTop = body.scrollTop;
     const frameHeight = body.offsetHeight;
     const totalHeight = body.scrollHeight;
-    const hasNextPage = this.currentPage < this.props.data.totalPage;
+    const hasNextPage = this.props.data.current_page < this.props.data.total_pages;
 
     if (scrollTop + frameHeight + threshold > totalHeight
         && !this.props.data.isLoading
         && hasNextPage)
       {
-      this.currentPage = ++this.currentPage;
-      this.props.fetchTransactions(this.currentPage);
+      this.currentPage = this.props.data.current_page;
+      this.props.fetchTransactions(this.currentPage, 20);
     }
 
     // console.log(`scrollTop ${scrollTop} window height ${frameHeight} total height ${totalHeight}`);

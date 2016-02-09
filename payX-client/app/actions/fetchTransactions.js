@@ -7,7 +7,7 @@ export const FETCH_TRANSACTION_SUCCESSED = 'FETCH_TRANSACTION_SUCCESSED';
 
 export const FLUSH_TRANSACTIONS = 'FLUSH_TRANSACTIONS';
 
-const fetchTransactions = (page = 0) => {
+const fetchTransactions = (page = 0, itemsPerPage = 10) => {
   return dispatch => {
     dispatch({
       type: FETCHING_TRANSACTION,
@@ -16,23 +16,31 @@ const fetchTransactions = (page = 0) => {
       }
     });
 
-    setTimeout(() => {
-      dispatch({
-        type:FETCH_TRANSACTION_SUCCESSED,
-        data: {
-          isLoading: false,
-          currentPage: page,
-          totalPage: 5,
-          itemPerPage: 10,
-          transactions: [
-            ...data,
-            ...data,
-            ...data,
-          ]
-        },
-      })
-      return;
-    }, 3000);
+    fetch.get('http://localhost:3000/transactions_history')
+    .query({
+      page: +page,
+      per_page: +itemsPerPage
+    })
+    .end((err, data) => {
+      if (data) {
+        let currentPage = JSON.parse(data.text)
+        dispatch({
+          type:FETCH_TRANSACTION_SUCCESSED,
+          data: {
+            ...{isLoading: false},
+            ...currentPage
+          },
+        })
+      } else {
+        dispatch({
+          type:FETCH_TRANSACTION_FAILED,
+          data: {
+            ...{isLoading: false},
+            ...data
+          },
+        })
+      }
+    })
   }
 }
 

@@ -167,3 +167,8 @@ body {
 .navbar-brand {
   color: white !important;
 }
+
+.transaction-item td {
+  max-width: 140px;
+  overflow: hidden;
+}

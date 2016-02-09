@@ -42,7 +42,7 @@ class ViewTransactions extends Component {
   }
 
   handleScroll(e) {
-    const threshold = 300;
+    const threshold = 300; //px
     const body = e.srcElement;
     const scrollTop = body.scrollTop;
     const frameHeight = body.offsetHeight;

@@ -17,16 +17,19 @@ const sendMoney = (data) => {
     });
 
     fetch.post('http://localhost:3000/send_money')
+    .set('Accept', 'application/json')
+    .type('form')
     .send({
       ...data,
+      ...data.currency,
       ...{
-      from: 'hoangtrieukhang@gmail.com',
+        from: 'hoangtrieukhang@gmail.com',
       }
     })
     .end((err, res) => {
-      if(err) {
+      if(!err) {
         dispatch({
-          type:SEND_MONEY_SUCCESSED,
+          type: SEND_MONEY_SUCCESSED,
           isLoading: false,
           data: JSON.parse(res.text),
           error: null
@@ -36,7 +39,7 @@ const sendMoney = (data) => {
         dispatch({
           type:SEND_MONEY_FAILED,
           isLoading: false,
-          error: error
+          error: err
         });
       }
     });

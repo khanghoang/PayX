@@ -125,6 +125,7 @@ class SendMoney extends Component {
 
   render() {
 
+    let loading = null;
     if (this.props.response.isLoading) {
       loading = (
         <div className='loading row'>

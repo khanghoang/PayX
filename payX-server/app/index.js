@@ -39,16 +39,18 @@ const paginate = (arrData, page, itemsPerPage = 10) => {
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.header('Access-Control-Allow-Methods', '*');
+  res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
   next();
 });
 
 server.use(bodyParser.urlencoded({extended: true}));
 
 server.post('/send_money', async (req, res) => {
+  let body = req.body;
   res.status(200).json({
     ...{success: true},
-    ...{req.body}
+    ...req.body
   });
 });
 

@@ -57,7 +57,7 @@ class SuccessfulPage extends Component {
       />
     ];
 
-    const symbol = _.get(this.props, 'response.currency.symbol');
+    const symbol = _.get(this.props, 'response.symbol');
     const to = _.get(this.props, 'response.to');
     const amount = _.get(this.props, 'response.amount');
 
@@ -65,15 +65,14 @@ class SuccessfulPage extends Component {
       return null;
     }
 
-
     return (
       <div>
         <Header
           tittle='Send Money'
         />
         <div className='success-page-container'>
-          <b>{`You have sent ${this.props.response.currency.symbol}${this.props.response.amount}
-             to ${this.props.response.to}`}</b>
+          <b>{`You have sent ${symbol}${amount}
+             to ${to}`}</b>
           <div className='row success-check vertical-padding-s'>
             <span className="glyphicon glyphicon-ok" aria-hidden="false"></span>
           </div>

@@ -36,6 +36,13 @@ const paginate = (arrData, page, itemsPerPage = 10) => {
   };
 }
 
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
+
 server.use(bodyParser.urlencoded({extended: true}));
 
 server.post('/send_money', async (req, res) => {

@@ -198,3 +198,8 @@ body {
 .text-left {
   text-align: left;
 }
+
+#container .navbar-header {
+  width: 100% !important;
+  float: none !important;
+}

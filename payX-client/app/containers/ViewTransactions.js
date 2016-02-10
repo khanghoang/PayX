@@ -30,7 +30,7 @@ class ViewTransactions extends Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.data.current_page, 20);
     this.scrollDOMObject = ReactDOM.findDOMNode(this.refs.scrollNode);
-    this.scrollDOMObject.addEventListener('scroll', _.throttle(this.handleScroll, 100));
+    this.scrollDOMObject.addEventListener('scroll', _.throttle(this.handleScroll, 1000));
   }
 
   componentWillUnmount() {

@@ -38,7 +38,7 @@ export default class RadioInput extends Component {
   render() {
     const options = this.props.datasource.map((item, idx) => {
       return (
-        <button type="button" className="payment-type-option form-control btn btn-default"
+        <button type="button" key={item.value} className="payment-type-option form-control btn btn-default"
           onClick={() => { this.onChange(item.value)}}>
           {item.displayString}
           {

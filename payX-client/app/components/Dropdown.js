@@ -30,7 +30,7 @@ export default class Dropdown extends Component {
 
   render() {
     const options = this.props.datasource.map((item, idx) => {
-      return <option value={item.value}>{item.displayString}</option>
+      return <option value={item.value} key={item.value}>{item.displayString}</option>
     });
 
     return (

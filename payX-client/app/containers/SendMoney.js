@@ -156,6 +156,7 @@ class SendMoney extends Component {
         type="button"
         onClick={this.onClickReset}
         value='Reset'
+        key='reset'
       />,
       <input
         className={sendButtonClasses}
@@ -163,6 +164,7 @@ class SendMoney extends Component {
         onClick={this.onClickSend}
         disabled={!this.state.valid}
         value='Send'
+        key='send'
       />
     ];
 

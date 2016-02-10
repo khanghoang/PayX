@@ -6,7 +6,7 @@ export default class Header extends Component {
       <nav className="navbar navbar-inverse navbar-fixed-top">
         <div className="container-fluid">
           <div className="navbar-header">
-            <div className='navbar-brand' style={{'text-align': 'center', 'width': '100%'}}>
+            <div className='navbar-brand' style={{'textAlign': 'center', 'width': '100%'}}>
               {this.props.tittle}
             </div>
           </div>

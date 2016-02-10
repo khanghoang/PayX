@@ -104,7 +104,7 @@ export default class FieldContainer extends Component {
 FieldContainer.propTypes = {
   rules: React.PropTypes.arrayOf(React.PropTypes.object),
   prefixText: React.PropTypes.string,
-  inputType: React.PropTypes.oneOf(['text', 'password']),
+  inputType: React.PropTypes.oneOf(['text', 'password', 'textarea', 'number']),
   onBlur: React.PropTypes.func,
   onKeyUp: React.PropTypes.func,
   onKeyChange: React.PropTypes.func,
@@ -114,13 +114,3 @@ FieldContainer.propTypes = {
 FieldContainer.defaultProps = {
   rules: []
 }
-
-// const rules = [
-//   {
-//     errorMessage: 'errorMessage',
-//     regex: '',
-//     validationFunc: (value) => {
-//       return boolean;
-//     }
-//   }
-// ]

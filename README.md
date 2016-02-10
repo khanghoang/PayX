@@ -19,8 +19,10 @@
 
 ####Client side:
 - Make sure it runs well in all the window sizes.
+- Add unit tests.
 
 ####Server side:
 - Validate the `send-money` api at the server side.
 - Need to store data in real DB, we're using dummy data for now.
 - Need to cache history transactions by using `redis` or `memcached`.
+- Add unit tests.

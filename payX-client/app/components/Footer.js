@@ -11,3 +11,7 @@ export default class Footer extends Component {
     );
   }
 }
+
+Footer.propTypes = {
+  children: React.PropTypes.node
+}

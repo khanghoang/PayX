@@ -15,3 +15,7 @@ export default class Header extends Component {
     );
   }
 }
+
+Header.propsTypes = {
+  title: React.PropTypes.string
+}

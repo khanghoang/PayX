@@ -48,5 +48,6 @@ export default class Dropdown extends Component {
 Dropdown.propTypes = {
   datasource: React.PropTypes.arrayOf(React.PropTypes.object),
   onChange: React.PropTypes.func,
-  name: React.PropTypes.string.isRequired
+  name: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func
 }

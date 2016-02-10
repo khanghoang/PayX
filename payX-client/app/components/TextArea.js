@@ -45,5 +45,8 @@ export default class FieldArea extends Component {
 
 FieldArea.propTypes = {
   prefixText: React.PropTypes.string,
-  onBlur: React.PropTypes.func
+  onBlur: React.PropTypes.func,
+  onKeyUp: React.PropTypes.func,
+  onKeychange: React.PropTypes.func,
+  onKeyPress: React.PropTypes.func
 }

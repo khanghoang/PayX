@@ -60,5 +60,6 @@ export default class RadioInput extends Component {
 RadioInput.propTypes = {
   datasource: React.PropTypes.arrayOf(React.PropTypes.object),
   onChange: React.PropTypes.func,
-  name: React.PropTypes.string.isRequired
+  name: React.PropTypes.string.isRequired,
+  isValid: React.PropTypes.func
 }

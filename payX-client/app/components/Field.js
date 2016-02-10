@@ -48,5 +48,9 @@ export default class Field extends Component {
 Field.propTypes = {
   prefixText: React.PropTypes.string,
   inputType: React.PropTypes.oneOf(['text', 'password', 'number']),
-  onBlur: React.PropTypes.func
+  onBlur: React.PropTypes.func,
+  onKeyUp: React.PropTypes.func,
+  onKeychange: React.PropTypes.func,
+  onKeyPress: React.PropTypes.func,
+  className: React.PropTypes.string
 }

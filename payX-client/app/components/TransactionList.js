@@ -19,3 +19,7 @@ export default class TransactionList extends Component {
     );
   }
 }
+
+TransactionList.propTypes = {
+  datasource: React.PropTypes.arrayOf(React.PropTypes.object)
+}

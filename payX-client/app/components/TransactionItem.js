@@ -66,3 +66,7 @@ export default class TransactionItem extends Component {
     );
   }
 }
+
+TransactionItem.propTypes = {
+  transaction: React.PropTypes.object
+}

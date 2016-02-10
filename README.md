@@ -22,7 +22,7 @@
 - Add unit tests.
 
 ####Server side:
-- Validate the `send-money` api at the server side.
+- Validate the `send-money` parameters at the server side.
 - Need to store data in real DB, we're using dummy data for now.
 - Need to cache history transactions by using `redis` or `memcached`.
 - Add unit tests.

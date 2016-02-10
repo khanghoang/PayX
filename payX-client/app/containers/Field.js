@@ -18,7 +18,7 @@ export default class FieldContainer extends Component {
     this.setState({
       arrErrorMessages: [],
       valid: false,
-      value: ''
+      value: '',
     });
     this.refs.input.reset();
   }
@@ -58,8 +58,8 @@ export default class FieldContainer extends Component {
 
   render() {
 
-    const errorMessages = this.state.arrErrorMessages.map((message) => {
-      return <div className='error-message'>{message}</div>
+    const errorMessages = this.state.arrErrorMessages.map((message, idx) => {
+      return <div className='error-message' key={idx}>{message}</div>
     });
 
     let renderObject = null;
@@ -74,6 +74,7 @@ export default class FieldContainer extends Component {
           onKeyUp={this.onValidateInput}
           style={this.props.style}
           ref="input"
+          key='input'
         />
       );
     } else {
@@ -86,6 +87,7 @@ export default class FieldContainer extends Component {
           onKeyUp={this.onValidateInput}
           style={this.props.style}
           ref="input"
+          key='input'
         />
       );
     }

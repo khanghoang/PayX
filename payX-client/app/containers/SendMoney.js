@@ -35,14 +35,7 @@ class SendMoney extends Component {
     this.onClickReset = this.onClickReset.bind(this);
     this.onClickSend = this.onClickSend.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
-    this.state = {
-      currency: datasourceCurrencies[0],
-      amount: null,
-      to: null,
-      message: null,
-      paymentType: null, // 'SEND' or 'PAY'
-      valid: false,
-    }
+    this.state = this.initialState();
   }
 
   componentDidMount() {
@@ -60,16 +53,20 @@ class SendMoney extends Component {
     }
   }
 
-  reset() {
-    this.setState({
+  initialState() {
+    return {
       currency: datasourceCurrencies[0],
       amount: null,
       to: null,
       message: null,
       paymentType: null, // 'SEND' or 'PAY'
       valid: false,
-    });
+      emailValid: false
+    };
+  }
 
+  reset() {
+    this.setState(this.initialState())
     _.each([
       this.refs.dropdown,
       this.refs.to,
@@ -188,9 +185,10 @@ class SendMoney extends Component {
           name='to'
           ref='to'
           children={validCheck}
+          key='to'
         />
         <FieldContainer
-          prefixText={`Amount: ${this.state.currency.symbol} `}
+          prefixText={`Amount: ${this.state.currency.symbol || ''} `}
           inputType='number'
           rules={amountRules}
           isValid={this.onValidChanged}
@@ -199,6 +197,7 @@ class SendMoney extends Component {
           name='amount'
           ref='amount'
           children={currencies}
+          key='amount'
         />
         <FieldContainer
           prefixText='Message (optional): '
@@ -208,6 +207,7 @@ class SendMoney extends Component {
           className='vertical-padding-s'
           name='message'
           ref='message'
+          key='message'
         />
         <b>What's this payment for?</b>
         <RadioInput

@@ -24,11 +24,11 @@ class ViewTransactions extends Component {
     super();
     this.onClickBackButton = this.onClickBackButton.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-    this.currentPage = 1;
+    this.onClickTryLoadAgain = this.onClickTryLoadAgain.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchTransactions(this.currentPage, 20);
+    this.props.fetchTransactions(this.props.data.current_page, 20);
     this.scrollDOMObject = ReactDOM.findDOMNode(this.refs.scrollNode);
     this.scrollDOMObject.addEventListener('scroll', _.throttle(this.handleScroll, 100));
   }
@@ -36,9 +36,6 @@ class ViewTransactions extends Component {
   componentWillUnmount() {
     this.scrollDOMObject.removeEventListener('scroll', this.handleScroll);
     this.props.flushTransactionCache();
-  }
-
-  componentDidUpdate() {
   }
 
   handleScroll(e) {
@@ -53,11 +50,17 @@ class ViewTransactions extends Component {
         && !this.props.data.isLoading
         && hasNextPage)
       {
-      this.currentPage = this.props.data.current_page;
-      this.props.fetchTransactions(this.currentPage, 20);
+      this.props.fetchTransactions(this.props.data.current_page, 20);
     }
 
     // console.log(`scrollTop ${scrollTop} window height ${frameHeight} total height ${totalHeight}`);
+  }
+
+  onClickTryLoadAgain() {
+    const hasNextPage = this.props.data.current_page < this.props.data.total_pages;
+    if (hasNextPage) {
+      this.props.fetchTransactions(this.props.data.current_page, 20);
+    }
   }
 
   onClickBackButton() {
@@ -81,10 +84,19 @@ class ViewTransactions extends Component {
         />
         <div className='transactions-history' ref='scrollNode'>
           <TransactionList
-            datasource={this.props.data.transactions}/>
+            datasource={this.props.data.transactions || []}/>
           {this.props.data.isLoading && (
             <div className='transactions-list-load-more'>
               Loading...
+            </div>
+          )}
+          {(this.props.data.error && !this.props.data.isLoading) && (
+            <div
+              className='transactions-list-load-more'
+              onClick={this.onClickTryLoadAgain}>
+              There is an error when loading data
+              <br/>
+              Please click here to try again
             </div>
           )}
         </div>
@@ -98,7 +110,12 @@ class ViewTransactions extends Component {
 
 ViewTransactions.defaultProps = {
   data: {
-    transactions: []
+    transactions: [],
+    current_page: 1,
+    // in case of the first time it loads and fails
+    // we need to set it to 2 to make the try to load more
+    // button works
+    total_pages: 2
   }
 }
 

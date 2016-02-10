@@ -56,7 +56,7 @@ server.post('/send_money', async (req, res) => {
 
 server.get('/transactions_history', async (req, res) => {
 
-  let page = _.get(req, 'query.page', 0);
+  let page = _.get(req, 'query.page', 1);
   let itemsPerPage = _.get(req, 'query.per_page', 10);
 
   let transactions = await loadFile(path.join(__dirname, '../app/data', 'transactions.json'));

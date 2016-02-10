@@ -7,7 +7,7 @@ export const FETCH_TRANSACTION_SUCCESSED = 'FETCH_TRANSACTION_SUCCESSED';
 
 export const FLUSH_TRANSACTIONS = 'FLUSH_TRANSACTIONS';
 
-const fetchTransactions = (page = 0, itemsPerPage = 10) => {
+const fetchTransactions = (page = 1, itemsPerPage = 10) => {
   return dispatch => {
     dispatch({
       type: FETCHING_TRANSACTION,
@@ -23,12 +23,12 @@ const fetchTransactions = (page = 0, itemsPerPage = 10) => {
     })
     .end((err, data) => {
       if (data) {
-        let currentPage = JSON.parse(data.text)
+        let currentPageData = JSON.parse(data.text);
         dispatch({
           type:FETCH_TRANSACTION_SUCCESSED,
           data: {
             ...{isLoading: false},
-            ...currentPage
+            ...currentPageData,
           },
         })
       } else {
@@ -36,7 +36,8 @@ const fetchTransactions = (page = 0, itemsPerPage = 10) => {
           type:FETCH_TRANSACTION_FAILED,
           data: {
             ...{isLoading: false},
-            ...data
+            ...{error: err},
+            ...{current_page: page}
           },
         })
       }

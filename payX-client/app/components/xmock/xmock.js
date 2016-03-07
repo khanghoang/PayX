@@ -1,6 +1,6 @@
 import fetchMock from 'fetch-mock';
 
-export function xmock(storage) {
+export default function xmock(storage) {
 
   let listenners = [];
 
@@ -13,10 +13,12 @@ export function xmock(storage) {
           routes: {
             name: r.name,
             matcher: r.matcher,
-            response: r.responseBody,
+            response: {
+              body: r.responseBody
+            },
             sendAsJson: true
           }
-        }
+        })
       }
     });
   }
@@ -99,6 +101,7 @@ export function xmock(storage) {
 
   return {
     initialize,
+    getRoutes,
     addRoute,
     removeRoute,
     disableRoute,

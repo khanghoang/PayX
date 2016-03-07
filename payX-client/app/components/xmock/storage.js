@@ -1,5 +1,5 @@
 const getRoutes = () => {
-  const routes = localStorage.getItem('_routes');
+  const routes = JSON.parse(localStorage.getItem('_routes'));
   return routes || [];
 }
 
@@ -8,7 +8,7 @@ const setRoutes = (routes) => {
   return localStorage.setItem('_routes');
 }
 
-export {
+export default {
   getRoutes,
   setRoutes
 };

@@ -1,43 +1,31 @@
 import React, {Component} from 'react';
 import fetchMock from 'fetch-mock';
+import xmock from '../components/xmock/xmock';
+import storage from '../components/xmock/storage';
 
 class XMock extends Component {
   constructor(props) {
     super(props);
+
+    window.fetchMock = fetchMock;
+    let mock = xmock(storage);
+
     this.state = {
       expanded: true,
-      datasource: []
+      datasource: mock.getRoutes()
     }
 
     this.toggle = this.toggle.bind(this);
-
-    window.fetchMock = fetchMock;
-
-    Object.observe(window.fetchMock, () => {
+    this.unsubcribe = mock.subscribe((routes) => {
       this.setState({
-        datasource: window.fetchMock.routes
+        datasource: routes
       });
-    });
+    })
+
   }
 
-  componentDidMount() {
-    fetchMock.mock({
-      routes: {
-        name: 'route',
-        matcher: 'http://localhost:3000/abc.json',
-        response: {
-          body: {
-            _id: '123ABC',
-            _rev: '946B7D1C',
-            username: 'pgte',
-            email: 'pedro.teixeira@gmail.com'
-          }, sendAsJson: true}
-      }
-    });
-
-    this.setState({
-      datasource: window.fetchMock.routes
-    });
+  componentWillUnmount() {
+    this.unsubcribe();
   }
 
   toggle() {
@@ -62,7 +50,7 @@ class XMock extends Component {
       const className = idx % 2 ? '' : 'even';
       return (
         <li className={className}>
-          {`name:${r.name}, body: ${JSON.stringify(r.response.body)}`}
+          {`name:${r.name}, body: ${JSON.stringify(r.responseBody)}`}
         </li>
       )
     });

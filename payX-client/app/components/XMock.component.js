@@ -11,11 +11,9 @@ class XMock extends Component {
 
     this.toggle = this.toggle.bind(this);
 
-    debugger;
     window.fetchMock = fetchMock;
 
     Object.observe(window.fetchMock, () => {
-      debugger;
       this.setState({
         datasource: window.fetchMock.routes
       });
@@ -23,7 +21,6 @@ class XMock extends Component {
   }
 
   componentDidMount() {
-    debugger;
     fetchMock.mock({
       routes: {
         name: 'route',
@@ -46,7 +43,7 @@ class XMock extends Component {
   toggle() {
     this.setState({
       expanded: !this.state.expanded
-    })
+    });
   }
 
   render() {
@@ -61,9 +58,10 @@ class XMock extends Component {
       overflow: 'scroll'
     }
 
-    let requests = this.state.datasource.map(r => {
+    let requests = this.state.datasource.map((r, idx) => {
+      const className = idx % 2 ? '' : 'even';
       return (
-        <li>
+        <li className={className}>
           {`name:${r.name}, body: ${JSON.stringify(r.response.body)}`}
         </li>
       )

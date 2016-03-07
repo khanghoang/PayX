@@ -17,6 +17,7 @@ import {
   amountRules
 } from '../data/datasouce';
 
+import fetchMock from 'fetch-mock';
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({...sendMoney, ...routeActions}, dispatch);
 }
@@ -117,7 +118,24 @@ class SendMoney extends Component {
   }
 
   onClickReset() {
-    this.reset();
+    fetch('http://localhost:3000/abc.json')
+    .then(
+      function(response) {
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+                      response.status);
+          return;
+        }
+        return response.json();
+      }
+    )
+    .then((res) => {
+      console.log(res);
+    })
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
+    // this.reset();
   }
 
   render() {

@@ -16,6 +16,7 @@ import {
   emailRules,
   amountRules
 } from '../data/datasouce';
+import autobind from '../util';
 
 import fetchMock from 'fetch-mock';
 function mapDispatchToProps(dispatch) {
@@ -33,7 +34,7 @@ class SendMoney extends Component {
   constructor() {
     super();
     this.onValidChanged = this.onValidChanged.bind(this);
-    this.onClickReset = this.onClickReset.bind(this);
+    // this.onClickReset = this.onClickReset.bind(this);
     this.onClickSend = this.onClickSend.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.state = this.initialState();
@@ -117,6 +118,7 @@ class SendMoney extends Component {
     this.props.sendMoney(this.state);
   }
 
+  @autobind
   onClickReset() {
     fetch('http://localhost:3000/abc.json')
     .then(

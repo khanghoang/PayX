@@ -33,10 +33,10 @@ class SendMoney extends Component {
 
   constructor() {
     super();
-    this.onValidChanged = this.onValidChanged.bind(this);
+    // this.onValidChanged = this.onValidChanged.bind(this);
     // this.onClickReset = this.onClickReset.bind(this);
-    this.onClickSend = this.onClickSend.bind(this);
-    this.onValueChange = this.onValueChange.bind(this);
+    // this.onClickSend = this.onClickSend.bind(this);
+    // this.onValueChange = this.onValueChange.bind(this);
     this.state = this.initialState();
   }
 
@@ -78,6 +78,7 @@ class SendMoney extends Component {
     ], (e) => { e.reset && e.reset() });
   }
 
+  @autobind
   onValidChanged(e, isValue) {
     const allFieldsValid = _.reduce([
       this.refs.to,
@@ -91,6 +92,7 @@ class SendMoney extends Component {
     });
   }
 
+  @autobind
   onValueChange(inputName, value) {
     switch(inputName) {
       case 'to':
@@ -114,6 +116,7 @@ class SendMoney extends Component {
     }
   }
 
+  @autobind
   onClickSend() {
     this.props.sendMoney(this.state);
   }

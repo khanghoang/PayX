@@ -20,7 +20,16 @@ module.exports = {
 
   devtool: 'eval',
 
+  resolve: {
+    alias: {
+      'sinon': 'sinon/pkg/sinon'
+    }
+  },
+
   module: {
+    noParse: [
+      /sinon/
+    ],
     loaders: [
       {
         // babel

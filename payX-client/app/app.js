@@ -17,6 +17,11 @@ import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
 
+import agent from 'superagent';
+
+import sinon from 'sinon';
+console.log(sinon);
+
 const history = createHistory();
 const middleware = syncHistory(history);
 const reducer = combineReducers({
@@ -30,6 +35,23 @@ const finalCreateStore = compose(
 )(createStore);
 const store = finalCreateStore(reducer);
 middleware.listenForReplays(store);
+
+// setup fake server
+// const server = sinon.fakeServer.create({
+//   // respondImmediately: true
+//   autoRespondAfter: 2000,
+//   autoRespond: true
+// });
+// server.respondWith("POST", "http://localhost:3000/send_money",
+//                   [200, { "Content-Type": "application/json" },
+//                     '{ "stuff": "is", "awesome": "in here" }']);
+// server.respondWith("POST", "http://localhost:3000/send_money",
+//                   [200, { "Content-Type": "application/json" },
+//                     '{ "stuff": "is", "awesome": "in here" }']);
+// server.autoRespondAfter = 2000;
+// window.server = server;
+window.agent = agent;
+// window.sinon = sinon;
 
 ReactDOM.render(
   (<Provider store={store}>

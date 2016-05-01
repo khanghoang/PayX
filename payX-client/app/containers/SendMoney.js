@@ -17,6 +17,7 @@ import {
   amountRules
 } from '../data/datasouce';
 import autobind from '../util';
+import agent from 'superagent';
 
 import fetchMock from 'fetch-mock';
 function mapDispatchToProps(dispatch) {
@@ -37,7 +38,17 @@ class SendMoney extends Component {
     // this.onClickReset = this.onClickReset.bind(this);
     // this.onClickSend = this.onClickSend.bind(this);
     // this.onValueChange = this.onValueChange.bind(this);
+    this.onClickButton = this.onClickButton.bind(this);
     this.state = this.initialState();
+  }
+
+  onClickButton() {
+    agent.get('http://jsonplaceholder.typicode.com/users')
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      debugger;
+      console.log(err, res);
+    });
   }
 
   componentDidMount() {
@@ -78,7 +89,7 @@ class SendMoney extends Component {
     ], (e) => { e.reset && e.reset() });
   }
 
-  @autobind
+  // @autobind
   onValidChanged(e, isValue) {
     const allFieldsValid = _.reduce([
       this.refs.to,
@@ -92,7 +103,7 @@ class SendMoney extends Component {
     });
   }
 
-  @autobind
+  // @autobind
   onValueChange(inputName, value) {
     switch(inputName) {
       case 'to':
@@ -116,12 +127,12 @@ class SendMoney extends Component {
     }
   }
 
-  @autobind
+  // @autobind
   onClickSend() {
     this.props.sendMoney(this.state);
   }
 
-  @autobind
+  // @autobind
   onClickReset() {
     fetch('http://localhost:3000/abc.json')
     .then(
@@ -198,6 +209,7 @@ class SendMoney extends Component {
         <Header
           tittle='Send Money'
         />
+        <button onClick={this.onClickButton}>Make request</button>
         <FieldContainer
           prefixText='To'
           inputType='text'

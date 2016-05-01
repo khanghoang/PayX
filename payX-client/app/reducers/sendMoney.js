@@ -13,6 +13,7 @@ const sendMoneyReducer = (state = {}, action) => {
       return {...state, ...action.data};
       break;
     case SEND_MONEY_SUCCESSED:
+      debugger;
       return {...state, ...action.data};
       break;
     case SEND_MONEY_FAILED:
